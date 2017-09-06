@@ -1,0 +1,7 @@
+todo
+    get cherry py setup
+    test cherry py by running and playing qwop
+    make enviroment(need feedback on state etc)
+    dockerize
+first algo random q, w, o, p(multiple buttons down at once allowed) record sequence, duration of press
+next( record based on angle(likely require extensive js moding)
