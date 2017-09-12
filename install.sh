@@ -1,11 +1,15 @@
+git submodule update --init --recursive
 if python3 -c "import virtualenv" &> /dev/null; then #check for virualenv install
     echo ''
 else
  	pip install virtualenv  
 fi
 
-virtualenv ..
-#activate
+virtualenv QWOPaiVirtualEnv
+#activate vintualenv
+source QWOPaiVirtualEnv/bin/activate
+pip install flask-socketio
+npm install socket.io
 
-pip install -e gym
-pip install -e gym-http-api
+
+
