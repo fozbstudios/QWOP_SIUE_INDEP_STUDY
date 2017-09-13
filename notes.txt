@@ -1,7 +1,6 @@
-todo
-    get cherry py setup
-    test cherry py by running and playing qwop
-    make enviroment(need feedback on state etc)
-    dockerize
+dockerize???
 first algo random q, w, o, p(multiple buttons down at once allowed) record sequence, duration of press
 next( record based on angle(likely require extensive js moding)
+
+should we package durantion with message or send a continuus stream(probablky first opt)
+(even with durantion should quueue events in batches to prevent input lag)

@@ -4,6 +4,7 @@
   "description": "TODO: LISCENSE(qwop?)",
   "main": "QWOP.js",
   "dependencies": {
+    "express": "^4.15.4",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {},
