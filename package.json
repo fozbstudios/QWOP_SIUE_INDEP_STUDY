@@ -5,6 +5,7 @@
   "main": "QWOP.js",
   "dependencies": {
     "express": "^4.15.4",
+    "requirejs": "^2.3.5",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {},

@@ -1,5 +1,4 @@
 ! function() {
-    "use strict";
 
     function t(t, e) {
         function s() {}
