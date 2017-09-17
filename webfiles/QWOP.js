@@ -405,7 +405,9 @@
         onmouseup: function() {},
         onmousewheel: function() {},
         onmousemove: function() {},
-        onkeydown: function() {},
+        onkeydown: function() {console.trace();
+                                console.log("a")
+        },
         onkeyup: function() {},
         ontextinput: function() {},
         ontouchdown: function() {},
@@ -775,7 +777,7 @@
                 batcher: this.world_batcher,
                 centered: !0,
                 texture: this.uiAtlasImage
-            }), this.blackSquare = new o.Sprite({
+            }), /*this.blackSquare = new o.Sprite({
                 name: "blackSquare",
                 pos: new I.Vector(this.world_camera.get_pos().x, this.world_camera.get_pos().y),
                 size: new I.Vector(l.screenWidth, l.screenHeight),
@@ -783,7 +785,7 @@
                 centered: !1,
                 batcher: this.world_batcher,
                 depth: 2e3
-            }), s = this.uiData.frames[6], this.intro = new o.Sprite({
+            }), /*s = this.uiData.frames[6], this.intro = new o.Sprite({
                 name: "intro",
                 pos: new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight),
                 size: new I.Vector(s.spriteSourceSize.w, s.spriteSourceSize.h),
@@ -792,7 +794,7 @@
                 centered: !0,
                 texture: this.uiAtlasImage,
                 depth: 2001
-            }), s = this.uiData.frames[3], this.fallenEnding = new o.Sprite({
+            }),*/ s = this.uiData.frames[3], this.fallenEnding = new o.Sprite({
                 name: "fallenEnding",
                 pos: new I.Vector(-1e4, -1e4),
                 size: new I.Vector(s.spriteSourceSize.w, s.spriteSourceSize.h),
@@ -844,13 +846,13 @@
             //&& (this.fallenEnding.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)), this.gameOverText.set_text("" + this.score + " metres"), this.gameOverText.set_pos(new I.Vector(this.fallenEnding.get_pos().x, this.fallenEnding.get_pos().y - 10)), this.gameEnded = !0)
         },
         reset: function() {
-             document.getElementById("LRscore").innerHTML = this.score, this.score = 0, this.scoreTime = 0,  this.bestText.set_text("Best: " + this.highScore + "m"), this.world_camera.get_pos().set_x(-10 * l.worldScale), this.world_camera.get_pos().set_y(-200), this.ui_camera.get_pos().set_x(0), this.ui_camera.get_pos().set_y(0), this.m_world.destroyJoint(this.neck), this.m_world.destroyJoint(this.leftShoulder), this.m_world.destroyJoint(this.leftElbow), this.m_world.destroyJoint(this.leftHip), this.m_world.destroyJoint(this.leftKnee), this.m_world.destroyJoint(this.leftAnkle), this.m_world.destroyJoint(this.rightShoulder), this.m_world.destroyJoint(this.rightElbow), this.m_world.destroyJoint(this.rightHip), this.m_world.destroyJoint(this.rightKnee), this.m_world.destroyJoint(this.rightAnkle), null != this.hurdleJoint && (this.m_world.destroyJoint(this.hurdleJoint), this.hurdleJoint = null, this.hurdleBase.destroy(), this.hurdleTop.destroy()), this.torso.destroy(), this.head.destroy(), this.leftArm.destroy(), this.leftForearm.destroy(), this.leftThigh.destroy(), this.leftCalf.destroy(), this.leftFoot.destroy(), this.rightArm.destroy(), this.rightForearm.destroy(), this.rightThigh.destroy(), this.rightCalf.destroy(), this.rightFoot.destroy(), this.world_camera.get_pos().set_x(this.world_camera_offset * l.worldScale), this.m_world.setGravity(new p.common.math.B2Vec2(0, l.gravity)), this.fallenEnding.set_pos(new I.Vector(-1e4, -1e4)), this.jumpEnding.set_pos(new I.Vector(-1e4, -1e4)), this.help.set_pos(new I.Vector(-1e4, -1e4)), this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)), this.gameOverText.set_pos(new I.Vector(-1e4, -1e4)), this.highScore > 1 && this.highScore < l.sandPitAt / l.worldScale * .1 - 1 ? (this.hsLine.get_pos().set_x(this.highScore * l.worldScale * 10), this.bestLineText.get_pos().set_x(this.hsLine.get_pos().x), this.bestLineText.set_text("Best: " + this.highScore + "m")) : this.highScore < l.sandPitAt / l.worldScale * .1 - 1 && (this.hsLine.get_pos().set_x(-1e4), this.bestLineText.get_pos().set_x(this.hsLine.get_pos().x), this.bestLineText.set_text("Best: " + this.highScore + "m"));
+             document.getElementById("LRscore").innerHTML = this.score, sendFinScore(this.score), this.score = 0, this.scoreTime = 0,  this.bestText.set_text("Best: " + this.highScore + "m"), this.world_camera.get_pos().set_x(-10 * l.worldScale), this.world_camera.get_pos().set_y(-200), this.ui_camera.get_pos().set_x(0), this.ui_camera.get_pos().set_y(0), this.m_world.destroyJoint(this.neck), this.m_world.destroyJoint(this.leftShoulder), this.m_world.destroyJoint(this.leftElbow), this.m_world.destroyJoint(this.leftHip), this.m_world.destroyJoint(this.leftKnee), this.m_world.destroyJoint(this.leftAnkle), this.m_world.destroyJoint(this.rightShoulder), this.m_world.destroyJoint(this.rightElbow), this.m_world.destroyJoint(this.rightHip), this.m_world.destroyJoint(this.rightKnee), this.m_world.destroyJoint(this.rightAnkle), null != this.hurdleJoint && (this.m_world.destroyJoint(this.hurdleJoint), this.hurdleJoint = null, this.hurdleBase.destroy(), this.hurdleTop.destroy()), this.torso.destroy(), this.head.destroy(), this.leftArm.destroy(), this.leftForearm.destroy(), this.leftThigh.destroy(), this.leftCalf.destroy(), this.leftFoot.destroy(), this.rightArm.destroy(), this.rightForearm.destroy(), this.rightThigh.destroy(), this.rightCalf.destroy(), this.rightFoot.destroy(), this.world_camera.get_pos().set_x(this.world_camera_offset * l.worldScale), this.m_world.setGravity(new p.common.math.B2Vec2(0, l.gravity)), this.fallenEnding.set_pos(new I.Vector(-1e4, -1e4)), this.jumpEnding.set_pos(new I.Vector(-1e4, -1e4)), this.help.set_pos(new I.Vector(-1e4, -1e4)), /*this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)),*/ this.gameOverText.set_pos(new I.Vector(-1e4, -1e4)), this.highScore > 1 && this.highScore < l.sandPitAt / l.worldScale * .1 - 1 ? (this.hsLine.get_pos().set_x(this.highScore * l.worldScale * 10), this.bestLineText.get_pos().set_x(this.hsLine.get_pos().x), this.bestLineText.set_text("Best: " + this.highScore + "m")) : this.highScore < l.sandPitAt / l.worldScale * .1 - 1 && (this.hsLine.get_pos().set_x(-1e4), this.bestLineText.get_pos().set_x(this.hsLine.get_pos().x), this.bestLineText.set_text("Best: " + this.highScore + "m"));
             for (var t = 0, e = this.speedArray; t < e.length;) {
                 {
                     e[t]
                 }++t, this.speedArray.pop()
             }
-            this.create_player(), this.fallen = !1, this.gameOver = !1, this.gameEnded = !1, this.jumpLanded = !1, this.jumped = !1, this.pause = !1, this.helpUp = !1, this.update(.03333333333333333)
+            this.create_player(), this.fallen = !1, this.gameOver = !1, this.gameEnded = !1, this.jumpLanded = !1, this.jumped = !1, this.pause = !1, this.helpUp = !1, this.update(.03333333333333333) 
         },
         update: function(t) {
             if (0 == this.pause && 0 == this.gameEnded && (this.scoreTime += t), 0 == this.initialAcceleration.get_length() && 0 != this.accelerometer.get_length() && (this.initialAcceleration = this.accelerometer), this.score < -2.5 ? this.initialAcceleration.dot(this.accelerometer) < -.8 && this.m_world.setGravity(new p.common.math.B2Vec2(0, -l.gravity)) : 0 != this.accelerometer.get_length() && (this.initialAcceleration = this.accelerometer), null != this.floorSprites)
@@ -902,7 +904,7 @@
             }
             if (1 == this.firstClick && 0 == this.pause && this.m_world.step(.04, 5, 5), null != this.torso) {
                 var A = this.torso._components.get("physicsBody", !1);
-                1 == this.firstClick && (A.getWorldCenter().y < -5 ? (this.world_camera.get_pos().set_y(A.getWorldCenter().y * l.worldScale - 210), this.ui_camera.get_pos().set_y(A.getWorldCenter().y * l.worldScale - 210)) : 0 == this.fallen && this.world_camera.get_pos().set_x((A.getWorldCenter().x + this.world_camera_offset) * l.worldScale)), 0 == this.jumpLanded && (this.score = Math.round(A.getWorldCenter().x) / 10, document.getElementById("CFscore").innerHTML = this.score, this.scoreText.set_text("" + this.score + " metres"))
+                1 == this.firstClick && (A.getWorldCenter().y < -5 ? (this.world_camera.get_pos().set_y(A.getWorldCenter().y * l.worldScale - 210), this.ui_camera.get_pos().set_y(A.getWorldCenter().y * l.worldScale - 210)) : 0 == this.fallen && this.world_camera.get_pos().set_x((A.getWorldCenter().x + this.world_camera_offset) * l.worldScale)), 0 == this.jumpLanded && (this.score = Math.round(A.getWorldCenter().x) / 10, document.getElementById("CFscore").innerHTML = this.score, sendCurScore(this.score), this.scoreText.set_text("" + this.score + " metres"))
             }
             var C;
             null != this.bevelShaderBody && (C = this.torso._components.get("physicsBody", !1), this.bevelShaderBody.set_vector2("lightVec", new I.Vector(-Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderHead && (C = this.head._components.get("physicsBody", !1), this.bevelShaderHead.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightArm && (C = this.rightArm._components.get("physicsBody", !1), this.bevelShaderRightArm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftArm && (C = this.leftArm._components.get("physicsBody", !1), this.bevelShaderLeftArm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightForearm && (C = this.rightForearm._components.get("physicsBody", !1), this.bevelShaderRightForearm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftForearm && (C = this.leftForearm._components.get("physicsBody", !1), this.bevelShaderLeftForearm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightThigh && (C = this.rightThigh._components.get("physicsBody", !1), this.bevelShaderRightThigh.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftThigh && (C = this.leftThigh._components.get("physicsBody", !1), this.bevelShaderLeftThigh.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightCalf && (C = this.rightCalf._components.get("physicsBody", !1), this.bevelShaderRightCalf.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftCalf && (C = this.leftCalf._components.get("physicsBody", !1), this.bevelShaderLeftCalf.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), 1 == this.jumpLanded && 0 == this.gameEnded ? (this.pause = !0, this.endGame()) : 0 == this.jumpLanded && 0 == this.gameEnded && 1 == this.fallen && this.endGame()
@@ -981,13 +983,16 @@
         },
         onmousedown: function(t) {
             if (0 != this.doneLoading) {
-                if (0 == this.firstClick && 1 == this.doneLoading && (this.firstClick = !0, this.intro.destroy(), this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)), this.scoreTime = 0), 1 == this.helpUp && (this.helpUp = !1, this.pause = !1, this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)), this.help.set_pos(new I.Vector(-1e4, -1e4))), this.muteButton.point_inside(t.pos)) {
+                if (0 == this.firstClick && 1 == this.doneLoading && (this.firstClick = !0, /*this.intro.destroy(), this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)),*/ this.scoreTime = 0), 1 == this.helpUp && (this.helpUp = !1, this.pause = !1, /*this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)),*/ this.help.set_pos(new I.Vector(-1e4, -1e4))), this.muteButton.point_inside(t.pos)) {
                     this.mute = !this.mute;
                     var e;
                     0 == this.mute ? (e = this.uiData.frames[8], m.audio.volume("ehh", 1), m.audio.volume("crunch", 1)) : (e = this.uiData.frames[9], m.audio.volume("ehh", 0), m.audio.volume("crunch", 0)), this.muteButton.set_uv(e.uv), this.muteButton.set_size(new I.Vector(e.spriteSourceSize.w, e.spriteSourceSize.h))
                 }
-                this.helpButton.point_inside(t.pos) && (this.pause = !0, this.helpUp = !0, this.blackSquare.set_pos(new I.Vector(this.world_camera.get_pos().x, this.world_camera.get_pos().y)), this.help.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)));
+                this.helpButton.point_inside(t.pos) && (this.pause = !0, this.helpUp = !0, /*this.blackSquare.set_pos(new I.Vector(this.world_camera.get_pos().x, this.world_camera.get_pos().y)),*/ this.help.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)));
                 var s = ["ios", "android"]; - 1 == h.indexOf(s, m.core.app.os, 0) && (this.QButton.point_inside(t.pos) && (this.QDown = !0, this.mouseClicked = "Q"), this.WButton.point_inside(t.pos) && (this.WDown = !0, this.mouseClicked = "W"), this.OButton.point_inside(t.pos) && (this.ODown = !0, this.mouseClicked = "O"), this.PButton.point_inside(t.pos) && (this.PDown = !0, this.mouseClicked = "P"))
+            console.log('i started maybe');
+            console.log(i);
+            console.log(this);
             }
         },
         onmouseup: function() {
