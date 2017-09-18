@@ -8,10 +8,8 @@ fi
 virtualenv QWOPaiVirtualEnv
 #activate vintualenv
 source QWOPaiVirtualEnv/bin/activate
+pip install flask
 pip install flask-socketio
-npm install requirejs
-npm install socket.io
-npm install express
 
 
 
