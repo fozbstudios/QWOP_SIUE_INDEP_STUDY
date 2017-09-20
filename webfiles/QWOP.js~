@@ -23,7 +23,7 @@
         }, s.scope = t, s.method = e, t.hx__closures__[e.__id__] = s), s
     }
     var i = {},
-        n = function() {
+this.show_console(this.console_visible),        n = function() {
             return A.Boot.__string_rec(this, "")
         },
         o = {};
