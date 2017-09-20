@@ -23,7 +23,7 @@
         }, s.scope = t, s.method = e, t.hx__closures__[e.__id__] = s), s
     }
     var i = {},
-        n = function() {
+this.show_console(this.console_visible),        n = function() {
             return A.Boot.__string_rec(this, "")
         },
         o = {};
@@ -853,7 +853,7 @@
                 }++t, this.speedArray.pop()
             }
             this.create_player(), this.fallen = !1, this.gameOver = !1, this.gameEnded = !1, this.jumpLanded = !1, this.jumped = !1, this.pause = !1, this.helpUp = !1, this.update(.03333333333333333) 
-        },
+        }, this.show_console(this.console_visible),
         update: function(t) {
             if (0 == this.pause && 0 == this.gameEnded && (this.scoreTime += t), 0 == this.initialAcceleration.get_length() && 0 != this.accelerometer.get_length() && (this.initialAcceleration = this.accelerometer), this.score < -2.5 ? this.initialAcceleration.dot(this.accelerometer) < -.8 && this.m_world.setGravity(new p.common.math.B2Vec2(0, -l.gravity)) : 0 != this.accelerometer.get_length() && (this.initialAcceleration = this.accelerometer), null != this.floorSprites)
                 for (var e = 0, s = this.floorSprites.length; s > e;) {
