@@ -15,8 +15,11 @@ socket.on('pressP', function() {
     console.log("got pressP event!!!")
 });
 
+
 function testMouseDown(){
-    var event = document.createEvent('Event'); event.initEvent('mousedown', true, false /*event type, buble through dom?, cancelable?*/); console.log("mouseSim"); 
+    var mde= new Event('mousedown');
+    t=document.getElementById('gameContent');
+    t.dispatchEvent(mde);
 }
 function testKeyDown(){
     var event = document.createEvent('Event'); event.initEvent('keydown', true, false /*event type, buble through dom?, cancelable?*/); event.keyCode = 76;
