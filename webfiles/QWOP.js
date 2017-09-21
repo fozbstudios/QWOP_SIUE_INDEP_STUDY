@@ -1,5 +1,55 @@
 ! function() {
+    var Rglobal={
+    "timestamp": 13243.240000000002,
+    "window_id": 1,
+    "state": [
+        "down",
+        2
+    ],
+    "button": 1,
+    "x": 397,
+    "y": 186,
+    "xrel": 397,
+    "yrel": 186,
+    "pos": {
+        "_construct": false,
+        "ignore_listeners": false,
+        "w": 0,
+        "z": 0,
+        "y": 186,
+        "x": 397
+    }
+}
+    var mainBoiMouseEmit
+    var mainBoiMouseGameOnMouseDown
 
+
+    (function(console){
+
+console.save = function(data, filename){
+
+    if(!data) {
+        console.error('Console.save: No data')
+        return;
+    }
+
+    if(!filename) filename = 'console.json'
+
+    if(typeof data === "object"){
+        data = JSON.stringify(data, undefined, 4)
+    }
+
+    var blob = new Blob([data], {type: 'text/json'}),
+        e    = document.createEvent('MouseEvents'),
+        a    = document.createElement('a')
+
+    a.download = filename
+    a.href = window.URL.createObjectURL(blob)
+    a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':')
+    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+    a.dispatchEvent(e)
+ }
+})(console)
     function t(t, e) {
         function s() {}
         s.prototype = t;
@@ -22,11 +72,13 @@
             return s.method.apply(s.scope, arguments)
         }, s.scope = t, s.method = e, t.hx__closures__[e.__id__] = s), s
     }
-    var i = {},
+    var i = {}, 
         n = function() {
             return A.Boot.__string_rec(this, "")
         },
+
         o = {};
+        
     o.ID = function(t, e) {
         null == e && (e = ""), null == t && (t = ""), this.name = "", this.name = t, this.id = "" == e ? m.utils.uniqueid(null) : e
     }, i["luxe.ID"] = o.ID, o.ID.__name__ = !0, o.ID.prototype = {
@@ -335,6 +387,19 @@
     }, o.Emitter = function() {
         this._checking = !1, this._to_remove = new _, this.connected = new _, this.bindings = new S.ds.IntMap
     }, i["luxe.Emitter"] = o.Emitter, o.Emitter.__name__ = !0, o.Emitter.prototype = {
+        _check: function() {
+            if (!this._checking) {
+                if (this._checking = !0, this._to_remove.length > 0) {
+                    for (var t = this._to_remove.iterator(); t.hasNext();) {
+                        var e = t.next(),
+                            s = this.bindings.get(e.event);
+                        h.remove(s, e.handler), 0 == s.length && this.bindings.remove(e.event)
+                    }
+                    this._to_remove = null, this._to_remove = new _
+                }
+                this._checking = !1
+            }
+        },
         emit: function(t, e) {
             this._check();
             var s = this.bindings.get(t);
@@ -372,19 +437,7 @@
             }
             return s
         },
-        _check: function() {
-            if (!this._checking) {
-                if (this._checking = !0, this._to_remove.length > 0) {
-                    for (var t = this._to_remove.iterator(); t.hasNext();) {
-                        var e = t.next(),
-                            s = this.bindings.get(e.event);
-                        h.remove(s, e.handler), 0 == s.length && this.bindings.remove(e.event)
-                    }
-                    this._to_remove = null, this._to_remove = new _
-                }
-                this._checking = !1
-            }
-        },
+        
         __class__: o.Emitter
     }, o.Game = function() {
         o.Emitter.call(this)
@@ -405,8 +458,7 @@
         onmouseup: function() {},
         onmousewheel: function() {},
         onmousemove: function() {},
-        onkeydown: function() {console.trace();
-            console.log("a")
+        onkeydown: function() {c
         },
         onkeyup: function() {},
         ontextinput: function() {},
@@ -424,6 +476,8 @@
         onwindowrestored: function() {},
         __class__: o.Game
     });
+    //mainBoiMouseEmit=o;
+   // console.log(mainBoiMouseEmit);
     var d = function() {
         this.world_camera_offset = -14, this.highScore = 0, this.scoreTime = 0, this.score = 0, o.Game.call(this)
     };
@@ -526,9 +580,19 @@
                 s = m.resources.cache.get("assets/bodygradient.png");
             e.set_clamp_s(33071), e.set_clamp_t(33071), s.set_clamp_s(33071), s.set_clamp_t(33071), t.slot = 1, e.slot = 2, s.slot = 2, this.bevelShaderBody.set_texture("tex1", t), this.bevelShaderHead.set_texture("tex1", t), this.bevelShaderLeftArm.set_texture("tex1", t), this.bevelShaderRightArm.set_texture("tex1", t), this.bevelShaderLeftForearm.set_texture("tex1", t), this.bevelShaderRightForearm.set_texture("tex1", t), this.bevelShaderLeftThigh.set_texture("tex1", t), this.bevelShaderRightThigh.set_texture("tex1", t), this.bevelShaderLeftCalf.set_texture("tex1", t), this.bevelShaderRightCalf.set_texture("tex1", t), this.bevelShaderBody.set_texture("tex2", s), this.bevelShaderHead.set_texture("tex2", e), this.bevelShaderLeftArm.set_texture("tex2", e), this.bevelShaderRightArm.set_texture("tex2", e), this.bevelShaderLeftForearm.set_texture("tex2", e), this.bevelShaderRightForearm.set_texture("tex2", e), this.bevelShaderLeftThigh.set_texture("tex2", e), this.bevelShaderRightThigh.set_texture("tex2", e), this.bevelShaderLeftCalf.set_texture("tex2", e), this.bevelShaderRightCalf.set_texture("tex2", e), this.bevelShaderBody.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderHead.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderLeftArm.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderRightArm.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderLeftForearm.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderRightForearm.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderLeftThigh.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderRightThigh.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderLeftCalf.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.bevelShaderRightCalf.set_vector2("screenRes", new I.Vector(t.width, t.height)), this.ui_batcher.set_layer(2), this.bg_batcher.set_layer(-2), this.player_atlas_json = m.resources.cache.get("assets/playercolor.json").asset.json, this.ui_atlas_json = m.resources.cache.get("assets/UISprites.json").asset.json, this.atlasImage = m.resources.cache.get("assets/playercolor.png"), this.uiAtlasImage = m.resources.cache.get("assets/UISprites.png"), this.uiData = o.importers.texturepacker.TexturePackerJSON.parse(this.ui_atlas_json), this.create_world(), this.create_player(), this.create_ui(), this.connect_input(), m.audio.on("music", "load", function() {
                 m.audio.loop("music"), m.audio.volume("music", 0)
-            }), this.doneLoading = !0
+            }), this.doneLoading = !0,
+            socket.on('aiReady',function(){
+                //console.log(mainBoiMouseEmit);
+              //  mainBoiMouseEmit(15,Rglobal);
+                mainBoiMouseGameOnMouseDown(Rglobal);
+                //mainBoiMouseEmit.Emitter.emit(15, Rglobal);
+                 //mainBoiMouseEmit.game.onmousedown(Rglobal);
+            });
+            socket.emit('serverReady');
         },
         create_world: function() {
+           // console.log(mainBoiMouseEmit);
+            //console.log(Rglobal)
             var t = 640,
                 e = 400,
                 s = m.resources.cache.get("assets/sprintbg.jpg");
@@ -840,6 +904,7 @@
                 texture: this.uiAtlasImage,
                 depth: 2001
             })
+
         },
         endGame: function() {
             null != this.rightHip && (this.rightHip.setMotorSpeed(0), this.rightHip.enableMotor(!1), this.leftHip.setMotorSpeed(0), this.leftHip.enableMotor(!1), this.rightKnee.enableLimit(!1), this.rightKnee.enableMotor(!1), this.leftKnee.enableLimit(!1), this.leftKnee.enableMotor(!1), this.rightShoulder.enableLimit(!1), this.rightShoulder.enableMotor(!1), this.leftShoulder.enableLimit(!1), this.leftShoulder.enableMotor(!1)), 0 == this.gameEnded && 1 == this.jumpLanded ? (this.jumpEnding.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)), this.gameOverText.set_text("" + this.score + " metres in " + Math.round(this.scoreTime) / 10 + " seconds"), this.gameOverText.set_pos(new I.Vector(this.jumpEnding.get_pos().x, this.jumpEnding.get_pos().y + 22)), this.gameEnded = !0) : 0 == this.gameEnded && 0 == this.jumpLanded, this.gameEnded = !0, this.reset()
@@ -990,9 +1055,8 @@
                 }
                 this.helpButton.point_inside(t.pos) && (this.pause = !0, this.helpUp = !0, /*this.blackSquare.set_pos(new I.Vector(this.world_camera.get_pos().x, this.world_camera.get_pos().y)),*/ this.help.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)));
                 var s = ["ios", "android"]; - 1 == h.indexOf(s, m.core.app.os, 0) && (this.QButton.point_inside(t.pos) && (this.QDown = !0, this.mouseClicked = "Q"), this.WButton.point_inside(t.pos) && (this.WDown = !0, this.mouseClicked = "W"), this.OButton.point_inside(t.pos) && (this.ODown = !0, this.mouseClicked = "O"), this.PButton.point_inside(t.pos) && (this.PDown = !0, this.mouseClicked = "P"))
-                console.log('i started maybe');
-                console.log(i);
-                console.log(this);
+              console.log(2);
+        console.trace();
             }
         },
         onmouseup: function() {
@@ -5374,7 +5438,7 @@ A.Boot = function() {}, i["js.Boot"] = A.Boot, A.Boot.__name__ = !0, A.Boot.__un
             ++i, s += "," + A.Boot.__string_rec(o, "")
         }
     var r;
-    "undefined" != typeof document && null != (r = document.getElementById("haxe:trace")) ? r.innerHTML += A.Boot.__unhtml(s) + "<br/>" : "undefined" != typeof console && null != console.log && console.log(s)
+    "undefined" != typeof document && null != (r = document.getElementById("haxe:trace")) ? r.innerHTML += A.Boot.__unhtml(s) + "<br/>" : "undefined" != typeof console && null != console.log
 }, A.Boot.__string_rec = function(t, e) {
     if (null == t) return "null";
     if (e.length >= 5) return "<...>";
@@ -6058,12 +6122,16 @@ C.App = function() {
                     this.emitter.emit(30, t), this.game.onwindowminimized(t);
                     break;
                 case 10:
-                    this.emitter.emit(31, t), this.game.onwindowrestored(t)
+                    this.emitter.emit(31, t), this.game.onwindowrestored(t) 
+                    console.log('window_event');
+                    console.log(e);
             }
         }
     },
+
     render: function() {
-        this.shutting_down || this.inited && (this.debug.end(o.Tag.renderdt), this.debug.start(o.Tag.renderdt), this.headless || (this.debug.start(o.Tag.render), this.emitter.emit(7), this.game.onprerender(), this.emitter.emit(8), this.game.onrender(), this.renderer.process(), this.emitter.emit(9), this.game.onpostrender(), this.debug.end(o.Tag.render)))
+        this.shutting_down || this.inited && (this.debug.end(o.Tag.renderdt), this.debug.start(o.Tag.renderdt), this.headless || (this.debug.start(o.Tag.render), this.emitter.emit(7), this.game.onprerender(), this.emitter.emit(8), this.game.onrender(), this.renderer.process(), this.emitter.emit(9), this.game.onpostrender(), mainBoiMouseEmit=this.emitter.emit,mainBoiMouseGameOnMouseDown=this.game.onmousedown,
+        /*console.log("boi"),*/this.debug.end(o.Tag.render)))
     },
     show_console: function(t) {
         null == t && (t = !0), this.console_visible = t, this.debug.show_console(this.console_visible)
@@ -6146,9 +6214,26 @@ C.App = function() {
                 yrel: e,
                 pos: this.screen.cursor.get_pos()
             };
+            //Rglobal=r;
+            //mainBoiMouseEmit=this;
+          
             this.shutting_down || (this.input.check_named_mouse(r, !0), this.emitter.emit(15, r), this.game.onmousedown(r))
+            console.log(5);
+            console.log(this.emitter.emit)
+            mainBoiMouseEmit=this.emitter.emit;
+          //  console.save(r,"Rglobal.json")
+           // console.save(mainBoiMouseEmit,"mainBoiMouseEmit.json")
+           console.log(mainBoiMouseEmit);
+           // console.log(this);
+        
         }
+
     },
+    function(){
+        mainBoiMouseEmit=this.emitter.emit; 
+        console.log("boi")
+    },
+
     onmouseup: function(t, e, s, i, n) {
         if (this.inited) {
             this.screen.cursor.set_internal(new I.Vector(t, e));
