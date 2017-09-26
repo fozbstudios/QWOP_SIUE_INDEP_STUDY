@@ -1,5 +1,6 @@
 package luxe;
 
+@:expose("nkID")
 class ID {
 
         /** the id */
@@ -18,6 +19,7 @@ class ID {
 
 
 /** A simple base object, event emitter, and ID. */
+@:expose("nkObjects")
 class Objects extends Emitter<Int> {
 
         /** the id */

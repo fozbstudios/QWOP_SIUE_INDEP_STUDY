@@ -7,6 +7,7 @@ import luxe.GameConfig;
 
 @:keep
 @:keepSub
+@:expose("nkGame")
 class Game {
 
     public var app : Engine;

@@ -10,6 +10,7 @@ typedef AudioSource = snow.systems.audio.AudioSource;
 typedef AudioInstance = snow.systems.audio.AudioInstance;
 
 @:allow(luxe.Engine)
+@:expose("nkAudio")
 class Audio {
 
     public var core : Engine;

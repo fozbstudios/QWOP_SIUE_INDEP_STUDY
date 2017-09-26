@@ -10,6 +10,7 @@ import luxe.Log.*;
     and when fired all listeners are informed. Events are not
     retroactive, only listeners that are attached at the time
     will recieve the event notifications. Don't forget to disconnect events. */
+@:expose("nkEvents")
 class Events {
 
     @:noCompletion public var event_queue : Array<EventObject>;

@@ -12,6 +12,7 @@ package luxe.structural;
 */
 
 @:generic
+@:expose("nkCache")
 class Cache<T> {
 
         /** The size of the cache. */

@@ -12,6 +12,7 @@ package luxe.structural;
 */
 
 @:generic
+@:expose("nkStack")
 class Stack<T> {
 
         /** The length of this stack. If 0, the stack is empty */
@@ -101,6 +102,7 @@ class Stack<T> {
 } //Stack
 
     /** A single stack node holding */
+@:expose("nkStackNode")
 class StackNode<T> {
 
         /** the node value */

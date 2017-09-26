@@ -6,6 +6,7 @@ import luxe.collision.data.*;
 
 /** A ray with a start, end, direction 
     and infinite state for collision queries. */
+@:expose("nkRay")
 class Ray {
 
         /** The start point of the ray. */

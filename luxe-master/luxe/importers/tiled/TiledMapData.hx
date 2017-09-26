@@ -11,6 +11,7 @@ import luxe.importers.tiled.TiledUtil.orientation_from_string;
 import luxe.tilemaps.Tilemap;
 
 
+@:expose("nkTiledMapData")
 class TiledMapData {
 
     public var version : String = '';
@@ -216,6 +217,7 @@ class TiledMapData {
 
 
 
+@:expose("nkTiledPropertyTile")
 class TiledPropertyTile {
 
     public var id:Int;

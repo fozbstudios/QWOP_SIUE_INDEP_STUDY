@@ -5,6 +5,7 @@ import luxe.importers.tiled.TiledUtil.valid_element;
 
 import luxe.Vector;
 
+@:expose("nkTiledImageLayer")
 class TiledImageLayer {
 
         /** The name of the image layer */
@@ -102,6 +103,7 @@ class TiledImageLayer {
 
 } //TiledImageLayer
 
+@:expose("nkTiledImage")
 class TiledImage {
 
         /** The image layer this belongs to */

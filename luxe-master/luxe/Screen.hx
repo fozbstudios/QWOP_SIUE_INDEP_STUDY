@@ -23,6 +23,7 @@ typedef WindowEvent = snow.types.Types.WindowEvent;
 
 @:allow(luxe.Engine)
 @:allow(luxe.Cursor)
+@:expose("nkScreen")
 class Screen {
 
         /** Convenience: Returns *a new vector*, the middle of the screen, rounded as (w/2, h/2) */
@@ -122,6 +123,7 @@ class Screen {
 
 
 
+@:expose("nkCursor")
 class Cursor {
 
         /** Locking the cursor hides it, and enables the `x_rel`/`y_rel`   

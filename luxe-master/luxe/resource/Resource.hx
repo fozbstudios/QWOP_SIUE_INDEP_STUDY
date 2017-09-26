@@ -8,6 +8,7 @@ import snow.api.Promise;
 import snow.systems.assets.Asset;
 import snow.systems.audio.AudioSource;
 
+@:expose("nkResource")
 class Resource {
 
     /**     The unique resource ID.
@@ -170,6 +171,7 @@ class Resource {
 } //Resource
 
 
+@:expose("nkBytesResource")
 class BytesResource extends Resource {
 
     public var asset:AssetBytes;
@@ -236,6 +238,7 @@ class BytesResource extends Resource {
 
 } //BytesResource
 
+@:expose("nkTextResource")
 class TextResource extends Resource {
 
     public var asset:AssetText;
@@ -302,6 +305,7 @@ class TextResource extends Resource {
 
 } //TextResource
 
+@:expose("nkJSONResource")
 class JSONResource extends Resource {
 
     public var asset:AssetJSON;
@@ -360,6 +364,7 @@ class JSONResource extends Resource {
 
 } //JSONResource
 
+@:expose("nkAudioResource")
 class AudioResource extends Resource {
 
     public var asset:AssetAudio;

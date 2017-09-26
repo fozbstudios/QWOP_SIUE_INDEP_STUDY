@@ -6,6 +6,7 @@ import luxe.collision.data.*;
 import luxe.collision.sat.*;
 
 /** A polygonal collision shape */
+@:expose("nkPolygon")
 class Polygon extends Shape {
 
         /** The transformed (rotated/scale) vertices cache */

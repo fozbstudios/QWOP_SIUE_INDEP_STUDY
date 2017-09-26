@@ -17,6 +17,7 @@ package luxe.structural;
 
 #if !display @:generic #end
 @:allow(luxe.structural.BalancedBSTIterator)
+@:expose("nkBalancedBST")
 class BalancedBST<K,T> {
 
         /** The tree root node */
@@ -672,6 +673,7 @@ class BalancedBST<K,T> {
 
 
 #if !display @:generic #end
+@:expose("nkBalancedBSTIterator")
 class BalancedBSTIterator<K,T> {
 
     var tree : BalancedBST<K,T>;
@@ -756,6 +758,7 @@ private class NodeColor {
 
     /** A balanced binary search tree node by `K` key and `T` value (type) */
 #if !display @:generic #end
+@:expose("nkBalancedBSTNode")
 class BalancedBSTNode<K,T> {
 
 

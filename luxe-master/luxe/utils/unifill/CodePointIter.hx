@@ -1,5 +1,6 @@
 package luxe.utils.unifill;
 
+@:expose("nkCodePointIter")
 class CodePointIter {
 
 	var string : String;

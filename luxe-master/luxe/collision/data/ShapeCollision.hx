@@ -6,6 +6,7 @@ import luxe.collision.data.*;
 
 /** Collision data, obtained by testing two shapes for a collision. */
 @:publicFields
+@:expose("nkShapeCollision")
 class ShapeCollision {
 
    //

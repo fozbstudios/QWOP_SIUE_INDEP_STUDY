@@ -14,6 +14,7 @@ import luxe.Screen;
 import snow.Snow;
 
 @:keep
+@:expose("nkLuxe")
 class Luxe {
 
         /** Direct access to the core engine */

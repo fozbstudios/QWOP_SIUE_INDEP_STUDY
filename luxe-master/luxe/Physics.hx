@@ -14,6 +14,7 @@ import snow.api.Timer;
 #end //nape
 
 
+@:expose("nkPhysics")
 class Physics {
 
 
@@ -192,6 +193,7 @@ class Physics {
 
     //base class for simple physics world
     //updates and access
+@:expose("nkPhysicsEngine")
 class PhysicsEngine {
 
     public var name : String = 'engine';

@@ -13,6 +13,7 @@ import phoenix.geometry.Geometry;
 
 import luxe.options.TilemapOptions;
 
+@:expose("nkOrtho")
 class Ortho {
 
     public static function worldpos_to_tile_coord( world_x:Float, world_y:Float, tile_width:Int, tile_height:Int, ?scale:Float=1.0, ?rounded:Bool=true ) : Vector {
@@ -65,6 +66,7 @@ class Ortho {
 
 } //Ortho
 
+@:expose("nkOrthoVisual")
 class OrthoVisual extends TilemapVisual {
 
     public override function create() {

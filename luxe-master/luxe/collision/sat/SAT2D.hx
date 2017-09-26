@@ -7,6 +7,7 @@ import luxe.collision.data.*;
 
 /** Implementation details for the 2D SAT collision queries.
     Used by the various shapes, and Collision API, mostly internally.  */
+@:expose("nkSAT")
 class SAT2D {
 
         /** Internal api - test a circle against a polygon */

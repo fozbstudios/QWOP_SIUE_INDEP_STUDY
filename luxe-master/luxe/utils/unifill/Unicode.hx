@@ -1,5 +1,6 @@
 package luxe.utils.unifill;
 
+@:expose("nkUnicode")
 class Unicode {
 
     public static inline var minCodePoint : Int = 0x0000;

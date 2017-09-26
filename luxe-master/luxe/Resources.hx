@@ -9,6 +9,7 @@ import phoenix.BitmapFont;
 import phoenix.Shader;
 import snow.api.Promise;
 
+@:expose("nkResources")
 class Resources {
 
         /** The Parcel set that this system contains. */
@@ -459,6 +460,7 @@ abstract ResourceType(Int) from Int to Int {
 }
 
 
+@:expose("nkResourceStats")
 class ResourceStats {
 
     public var total : Int = 0;

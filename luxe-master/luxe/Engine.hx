@@ -32,6 +32,7 @@ typedef UserConfig = Dynamic
 @:keep
 @:noCompletion
 @:log_as('luxe')
+@:expose("nkEngine")
 class Engine extends snow.App {
 
         //the game object running the core
@@ -744,6 +745,7 @@ allocating strings each frame.
 */
 @:noCompletion
 @:allow(luxe.Engine)
+@:expose("nkTag")
 class Tag {
     static var update       = 'update dt';
     static var tick         = 'tick dt';

@@ -19,6 +19,7 @@ import luxe.options.EntityOptions;
 import luxe.Log.*;
 
 @:autoBuild(luxe.macros.EntityRules.apply())
+@:expose("nkEntity")
 class Entity extends Objects {
 
         /** The map of attached components, by name. use .get to find components in children and from other components instead of accessing this unless you need to */

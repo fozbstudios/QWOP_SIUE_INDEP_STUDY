@@ -20,6 +20,7 @@ import luxe.Log.assert;
 using StringTools;
 
 @:allow(luxe.Engine)
+@:expose("nkDebug")
 class Debug {
 
     public var app : Engine;

@@ -2,6 +2,7 @@ package luxe.importers.obj;
 
 import luxe.importers.obj.Data;
 
+@:expose("nkReader")
 class Reader {
     var i : haxe.io.Input;
 

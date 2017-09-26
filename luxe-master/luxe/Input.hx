@@ -5,6 +5,7 @@ import luxe.Log._debug;
 import snow.types.Types;
 
 @:allow(luxe.Engine)
+@:expose("nkInput")
 class Input {
 
     var core : Engine;
@@ -687,6 +688,7 @@ enum TextEventType {
 } //TextEventType
 
 /** Information about a keyboard event */
+@:expose("nkKeyEvent")
 class KeyEvent {
 
     public function new() {
@@ -724,6 +726,7 @@ class KeyEvent {
 } //KeyEvent
 
 /** Information about a touch event */
+@:expose("nkTouchEvent")
 class TouchEvent {
 
     public function new() {
@@ -767,6 +770,7 @@ class TouchEvent {
 } //TouchEvent
 
 /** Information about a text input event */
+@:expose("nkTextEvent")
 class TextEvent {
 
     public function new() {
@@ -819,6 +823,7 @@ enum GamepadEventType {
 } //GamepadEventType
 
 /** Information about a gamepad event */
+@:expose("nkGamepadEvent")
 class GamepadEvent {
 
     public function new() {
@@ -887,6 +892,7 @@ class GamepadEvent {
 } //GamepadEvent
 
 /** Information about a mouse event */
+@:expose("nkMouseEvent")
 class MouseEvent {
 
     public function new() {
@@ -978,6 +984,7 @@ enum InputEventType {
 } //InputEventType
 
 /** Information about a named input event */
+@:expose("nkInputEvent")
 class InputEvent {
 
     public function new() {

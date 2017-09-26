@@ -6,6 +6,7 @@ import luxe.collision.data.*;
 import luxe.collision.sat.*;
 
 /** A circle collision shape */
+@:expose("nkCircle")
 class Circle extends Shape {
 
         /** The radius of this circle. Set on construction */

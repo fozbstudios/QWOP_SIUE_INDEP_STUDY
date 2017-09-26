@@ -27,6 +27,7 @@ enum SizeMode {
 } //SizeMode
 
     /** An entity based camera class */
+@:expose("nkCamera")
 class Camera extends Entity {
 
         /** The viewport size for this camera, proxy to the view */

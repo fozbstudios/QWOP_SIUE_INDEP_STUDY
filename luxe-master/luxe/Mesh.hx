@@ -13,6 +13,7 @@ import luxe.Log.*;
 
 import luxe.options.MeshOptions;
 
+@:expose("nkMesh")
 class Mesh {
 
     public var geometry : Geometry;

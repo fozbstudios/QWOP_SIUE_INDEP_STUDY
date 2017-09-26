@@ -2,6 +2,7 @@ package luxe.importers.bitmapfont;
 
 import luxe.importers.bitmapfont.BitmapFontData;
 
+@:expose("nkBitmapFontParser")
 class BitmapFontParser {
 
     //public api

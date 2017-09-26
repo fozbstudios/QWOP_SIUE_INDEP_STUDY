@@ -6,6 +6,7 @@ import luxe.collision.shapes.*;
 import luxe.collision.data.*;
 
 /** A base collision shape */
+@:expose("nkShape")
 class Shape {
 
 

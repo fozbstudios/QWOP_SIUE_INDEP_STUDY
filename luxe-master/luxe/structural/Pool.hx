@@ -13,6 +13,7 @@ package luxe.structural;
 */
 
 @:generic
+@:expose("nkPool")
 class Pool<T> {
 
         /** The available items in the pool. */

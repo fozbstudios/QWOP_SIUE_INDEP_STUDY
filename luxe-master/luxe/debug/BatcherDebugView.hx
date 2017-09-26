@@ -7,6 +7,7 @@ import luxe.structural.BalancedBST.BalancedBSTNode;
 import phoenix.geometry.Geometry;
 
 
+@:expose("nkBatcherDebugView")
 class BatcherDebugView extends luxe.debug.DebugView {
 
 

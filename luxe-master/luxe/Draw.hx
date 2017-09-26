@@ -17,6 +17,7 @@ import luxe.options.DrawOptions;
     and is a facilitator for higher level drawing. These can be used given to a `Visual` to convert
     them into a higher level entity for use with the default scene.
  */
+@:expose("nkDraw")
 class Draw {
 
 //Public API

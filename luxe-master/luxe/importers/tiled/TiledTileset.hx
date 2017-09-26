@@ -5,6 +5,7 @@ import luxe.importers.tiled.TiledUtil.valid_element;
 
 import phoenix.Texture;
 
+@:expose("nkTiledTileset")
 class TiledTileset {
 
     public var name : String = '';

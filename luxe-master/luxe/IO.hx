@@ -3,6 +3,7 @@ package luxe;
 import luxe.Engine;
 
 @:allow(luxe.Engine)
+@:expose("nkIO")
 class IO {
 
     public var core : Engine;

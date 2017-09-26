@@ -2,6 +2,7 @@ package luxe.debug;
 
 import luxe.Screen.WindowEvent;
 
+@:expose("nkTraceDebugView")
 class TraceDebugView extends luxe.debug.DebugView {
 
         //log console

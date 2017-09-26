@@ -12,6 +12,7 @@ import luxe.Log._verbose;
 import luxe.Log._verboser;
 
 
+@:expose("nkState")
 class State extends ID {
 
     public var machine : States;
@@ -106,6 +107,7 @@ class State extends ID {
 
 } //State
 
+@:expose("nkStates")
 class States extends Objects {
 
     @:noCompletion public var _states: Map<String,State>;

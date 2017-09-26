@@ -19,6 +19,7 @@ import luxe.options.VisualOptions;
 
 import luxe.Log.*;
 
+@:expose("nkVisual")
 class Visual extends Entity {
 
 

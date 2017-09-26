@@ -7,6 +7,7 @@ import luxe.options.EntityOptions;
 
 import luxe.Log.*;
 
+@:expose("nkScene")
 class Scene extends Objects {
 
         /** The list of entities within this `Scene` */

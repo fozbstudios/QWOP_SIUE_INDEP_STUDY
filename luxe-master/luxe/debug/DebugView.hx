@@ -6,6 +6,7 @@ import luxe.Input.TouchEvent;
 import luxe.Screen.WindowEvent;
 
 
+@:expose("nkDebugView")
 class DebugView extends luxe.Objects {
         
     public var debug: luxe.Debug;

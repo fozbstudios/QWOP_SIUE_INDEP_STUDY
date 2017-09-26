@@ -14,6 +14,7 @@ package luxe.structural;
 import Map;
 
 @:generic
+@:expose("nkOrderedMapIterator")
 class OrderedMapIterator<K,V> {
 
     var map : OrderedMap<K,V>;
@@ -29,6 +30,7 @@ class OrderedMapIterator<K,V> {
 } //OrderedMapIterator
 
 @:generic
+@:expose("nkOrderedMap")
 class OrderedMap<K, V> implements IMap<K, V> {
 
     @:noCompletion public var map:Map<K, V>;

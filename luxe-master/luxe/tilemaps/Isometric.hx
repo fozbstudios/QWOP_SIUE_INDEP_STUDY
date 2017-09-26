@@ -15,6 +15,7 @@ import phoenix.Vector;
 
 import luxe.options.TilemapOptions;
 
+@:expose("nkIsometric")
 class Isometric {
 
     public static function worldpos_to_tile_coord( world_x:Float, world_y:Float, tile_width:Int, tile_height:Int, ?scale:Float=1.0, ?rounded:Bool=true ) : Vector {
@@ -81,6 +82,7 @@ class Isometric {
 
 } //Ortho
 
+@:expose("nkIsometricVisual")
 class IsometricVisual extends TilemapVisual {
 
     public override function create() {

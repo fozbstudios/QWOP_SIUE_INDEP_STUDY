@@ -2,6 +2,7 @@ package luxe.utils;
 
 //Portions ported from Three.js http://github.com/mrdoob/three.js
 
+@:expose("nkMaths")
 class Maths {
 
     function new() {}

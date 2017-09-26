@@ -13,6 +13,7 @@ import luxe.Log._debug;
 import luxe.Log._verbose;
 
 @:autoBuild(luxe.macros.ComponentRules.apply())
+@:expose("nkComponent")
 class Component extends ID {
 
         /** the entity this component is attached to */

@@ -7,6 +7,7 @@ import luxe.Input;
 import luxe.Screen.WindowEvent;
 import luxe.Log.*;
 
+@:expose("nkSceneDebugView")
 class SceneDebugView extends luxe.debug.DebugView  {
 
     var items_list : luxe.Text;

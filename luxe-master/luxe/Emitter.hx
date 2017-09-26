@@ -16,6 +16,7 @@ import luxe.Log.log;
 /** A simple event emitter, used as a base class for systems that want to handle direct connections to named events */
 
 // @:generic
+@:expose("nkEmitter")
 class Emitter<ET:Int> {
 
     @:noCompletion public var bindings : IntMap<HandlerList>;

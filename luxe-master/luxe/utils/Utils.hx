@@ -5,6 +5,7 @@ import luxe.Engine;
 import haxe.CallStack;
 import snow.api.buffers.Uint8Array;
 
+@:expose("nkUtils")
 class Utils {
 
     public var geometry : luxe.utils.GeometryUtils;

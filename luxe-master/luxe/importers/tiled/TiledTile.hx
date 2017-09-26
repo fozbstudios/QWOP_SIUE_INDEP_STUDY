@@ -2,6 +2,7 @@ package luxe.importers.tiled;
 
 import luxe.importers.tiled.TiledLayer;
 
+@:expose("nkTiledTile")
 class TiledTile {
 
     public var layer : TiledLayer;

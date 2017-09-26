@@ -6,6 +6,7 @@ import luxe.collision.data.*;
 
 /** Ray intersection data obtained by testing two rays for intersection. */
 @:publicFields
+@:expose("nkRayIntersection")
 class RayIntersection {
 
         /** The first ray in the test */

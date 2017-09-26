@@ -11,6 +11,7 @@ import luxe.Camera.ProjectionType;
 
 import luxe.options.CameraOptions;
 
+@:expose("nkFlyCamera")
 class FlyCamera extends luxe.Camera {
 
     public var move_forward : Bool;

@@ -13,6 +13,7 @@ import luxe.importers.texturepacker.TexturePackerData;
 //     "speed": "18"
 // }
 
+@:expose("nkTexturePackerSpriteAnimation")
 class TexturePackerSpriteAnimation {
 
 

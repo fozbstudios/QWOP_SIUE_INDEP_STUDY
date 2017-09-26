@@ -8,6 +8,7 @@ private enum LogError {
     RequireString(detail:String);
 }
 
+@:expose("nkLog")
 class Log {
 
         //default to `log`

@@ -10,6 +10,7 @@ import phoenix.geometry.Geometry;
 import phoenix.geometry.QuadGeometry;
 import phoenix.geometry.Vertex;
 
+@:expose("nkProfilerDebugView")
 class ProfilerDebugView extends luxe.debug.DebugView {
 
     public static var lists:Map<String,ProfilerValue>;

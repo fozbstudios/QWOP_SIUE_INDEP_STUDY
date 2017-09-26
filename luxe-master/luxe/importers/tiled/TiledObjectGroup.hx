@@ -12,6 +12,7 @@ enum TiledObjectType {
     ellipse;
 } //TiledObjectType
 
+@:expose("nkTiledPolyObject")
 class TiledPolyObject {
     public var origin:Vector;
     public var points:Array<Vector>;
@@ -21,6 +22,7 @@ class TiledPolyObject {
     }
 } //TiledPolyObject
 
+@:expose("nkTiledObject")
 class TiledObject {
 
         /** The group that this TiledObject is from */
@@ -203,6 +205,7 @@ class TiledObject {
 
 } //TiledObject
 
+@:expose("nkTiledObjectGroup")
 class TiledObjectGroup {
 
     public var map : TiledMapData;

@@ -5,6 +5,7 @@ import luxe.Vector;
 import phoenix.geometry.Geometry;
 
 
+@:expose("nkGeometryUtils")
 class GeometryUtils {
 
     static inline var two_pi : Float = 6.283185307179586;

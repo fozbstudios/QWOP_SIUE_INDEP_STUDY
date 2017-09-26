@@ -8,6 +8,7 @@ import luxe.Sprite;
 import luxe.Color;
 import luxe.options.ParcelProgressOptions;
 
+@:expose("nkParcelProgress")
 class ParcelProgress {
 
     var parcel : Parcel;

@@ -10,6 +10,7 @@ import luxe.utils.Maths;
 import phoenix.Shader;
 import phoenix.Texture;
 
+@:expose("nkStatsDebugView")
 class StatsDebugView extends luxe.debug.DebugView  {
 
     public var _last_render_stats : RenderStats;

@@ -4,6 +4,7 @@ import luxe.Engine;
 import haxe.Timer;
 import luxe.Log._debug;
 
+@:expose("nkTimer")
 class Timer {
 
 

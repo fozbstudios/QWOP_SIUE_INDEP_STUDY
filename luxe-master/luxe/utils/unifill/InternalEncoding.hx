@@ -12,6 +12,7 @@ package luxe.utils.unifill;
    InternalEncoding provides primitive API to deal with strings across
    all platforms. You should consider adopting Unifill before this.
  **/
+@:expose("nkInternalEncoding")
 class InternalEncoding {
 
     /**

@@ -5,6 +5,7 @@ package luxe.utils.unifill;
    ideally used with 'using Unifill' and then acts as an extension to
    the String class.
  **/
+@:expose("nkUnifill")
 class Unifill {
 
     /**

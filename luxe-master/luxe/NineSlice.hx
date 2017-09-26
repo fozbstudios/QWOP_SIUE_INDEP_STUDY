@@ -23,6 +23,7 @@ private typedef Slice = {
 };
 
 /** A nineslice based sprite, for scaling */
+@:expose("nkNineSlice")
 class NineSlice extends luxe.Visual {
 
     public var top : Float = 32;

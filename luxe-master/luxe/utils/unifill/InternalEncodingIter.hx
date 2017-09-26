@@ -1,5 +1,6 @@
 package luxe.utils.unifill;
 
+@:expose("nkInternalEncodingIter")
 class InternalEncodingIter {
 
     public var string : String;

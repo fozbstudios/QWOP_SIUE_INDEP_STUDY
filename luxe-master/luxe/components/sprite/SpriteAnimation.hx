@@ -14,6 +14,7 @@ import luxe.Log.*;
     fire events on specific frames, and handles both UV (spritesheet/atlas)
     animation types or image sequences.
 */
+@:expose("nkSpriteAnimation")
 class SpriteAnimation extends Component {
 
         /** The current animation data for this animation */
@@ -515,6 +516,7 @@ enum SpriteAnimationType {
 }
 
 
+@:expose("nkSpriteAnimationData")
 class SpriteAnimationData {
 
     public static var frame_range_regex : EReg = ~/(\d*)(\b\s*?-\s*?\b)(\d*)/gi;

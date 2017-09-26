@@ -2,6 +2,7 @@ package luxe.importers.tiled;
 
 import luxe.tilemaps.Tilemap;
 
+@:expose("nkTiledUtil")
 class TiledUtil {
 
     public static function valid_element(element:Xml) {

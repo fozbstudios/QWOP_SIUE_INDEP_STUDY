@@ -12,6 +12,7 @@ import phoenix.geometry.Geometry;
 
 typedef TilemapVisualLayerGeometry = Array< Array<Geometry> >;
 
+@:expose("nkTilemapVisual")
 class TilemapVisual {
 
     public var geometry : Map<String, TilemapVisualLayerGeometry>;
@@ -173,6 +174,7 @@ class TilemapVisual {
 
 } //TilemapVisual
 
+@:expose("nkTile")
 class Tile {
 
     public var uuid : String;
@@ -263,6 +265,7 @@ class Tile {
 } //Tile
 
 
+@:expose("nkTileLayer")
 class TileLayer {
 
         /** the depth/ordering value. 
@@ -393,6 +396,7 @@ class TileLayer {
 } //TileLayer
 
 
+@:expose("nkTileset")
 class Tileset {
 
     public var texture : Texture;
@@ -450,6 +454,7 @@ class Tileset {
 
 } //Tileset
 
+@:expose("nkTilemap")
 class Tilemap {
 
         /** The layers the map consists of, stored by name */

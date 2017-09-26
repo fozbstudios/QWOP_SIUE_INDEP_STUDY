@@ -14,6 +14,7 @@ typedef TiledMapOptions = {
     ?asset_path : String
 }
 
+@:expose("nkTiledMap")
 class TiledMap extends Tilemap {
 
     public var tiledmap_data : TiledMapData;

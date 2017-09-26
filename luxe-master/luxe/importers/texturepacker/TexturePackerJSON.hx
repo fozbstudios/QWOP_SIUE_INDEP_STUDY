@@ -7,6 +7,7 @@ enum TexturePackerJSONType {
     array;
 }
 
+@:expose("nkTexturePackerJSON")
 class TexturePackerJSON {
 
     public static function parse( json:Dynamic, ?json_type:TexturePackerJSONType ) : TexturePackerData {

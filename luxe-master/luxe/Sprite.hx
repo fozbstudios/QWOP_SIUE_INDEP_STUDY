@@ -11,6 +11,7 @@ import phoenix.geometry.QuadGeometry;
 
 import luxe.options.SpriteOptions;
 
+@:expose("nkSprite")
 class Sprite extends Visual {
 
 

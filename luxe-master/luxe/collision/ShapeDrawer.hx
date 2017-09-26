@@ -6,6 +6,7 @@ import luxe.Vector;
 
 /** To implement your own debug drawing class, you only need to override drawLine function and implement it
     the rest is handled internally. You can override specifics if you want, but it's not required */
+@:expose("nkShapeDrawer")
 class ShapeDrawer {
 
 //Public API

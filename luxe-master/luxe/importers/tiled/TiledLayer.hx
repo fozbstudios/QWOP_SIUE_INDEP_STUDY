@@ -6,6 +6,7 @@ import luxe.importers.tiled.TiledUtil.valid_element;
 
 // Parts adapted from https://github.com/kasoki/openfl-tiled by Christopher "Kasoki" Kaster
 
+@:expose("nkTiledLayer")
 class TiledLayer {
 
     public var opacity : Float = 1.0;

@@ -7,6 +7,7 @@ import luxe.Log.*;
 
 import luxe.options.RenderProperties;
 
+@:expose("nkShapeDrawerLuxe")
 class ShapeDrawerLuxe extends ShapeDrawer {
 
     static var color = new luxe.Color().rgb(0xf6007b); //0xff4b03

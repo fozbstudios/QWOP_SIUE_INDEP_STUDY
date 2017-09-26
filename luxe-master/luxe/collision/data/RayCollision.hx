@@ -6,6 +6,7 @@ import luxe.collision.data.*;
 
 /** Ray collision intersection data, obtained by testing a shape and a ray. */
 @:publicFields
+@:expose("nkRayCollision")
 class RayCollision {
 
         /** Shape the intersection was with. */
@@ -55,6 +56,7 @@ class RayCollision {
 
 
 /** A static extension class helper for RayCollision */
+@:expose("nkRayCollisionHelper")
 class RayCollisionHelper {
 
         /** Convenience: get the start X point along the line.

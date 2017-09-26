@@ -16,6 +16,7 @@ package luxe.structural;
 */
 
 #if !display @:generic #end
+@:expose("nkBST")
 class BST<K,T> {
 
         /** The tree root node */
@@ -508,6 +509,7 @@ class BST<K,T> {
 
     /** A binary search tree node by `K` key and `T` value (type) */
 #if !display @:generic #end
+@:expose("nkBSTNode")
 class BSTNode<K,T> {
 
         /** The node left of this node (less than) */

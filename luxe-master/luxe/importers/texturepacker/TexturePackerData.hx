@@ -27,6 +27,7 @@ typedef TexturePackerFrame = {
     origin : luxe.Vector
 }
 
+@:expose("nkTexturePackerData")
 class TexturePackerData {
 
     public var meta : TexturePackerMeta;

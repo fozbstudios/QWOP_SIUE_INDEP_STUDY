@@ -12,6 +12,7 @@ import luxe.Log.*;
 
  Accessible through Luxe.utils.random.get(), or used as a class in your own code.
 */
+@:expose("nkRandom")
 class Random {
 
     public function new( _initial_seed:Float ) {

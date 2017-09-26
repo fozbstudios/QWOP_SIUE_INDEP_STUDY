@@ -7,6 +7,7 @@ import phoenix.Texture;
 import luxe.options.ParticleOptions;
 import luxe.Log.*;
 
+@:expose("nkParticleSystem")
 class ParticleSystem extends Entity {
 
         /** Setting this to true will pause all emission and particle updates, pausing the system */
@@ -102,6 +103,7 @@ private typedef ParticleEmitterInitData = {
     template : ParticleEmitterOptions
 } //ParticleEmitterInitData
 
+@:expose("nkParticleEmitter")
 class ParticleEmitter extends Component {
 
     public var system : ParticleSystem;
@@ -644,6 +646,7 @@ class ParticleEmitter extends Component {
 } //ParticleEmitter
 
 
+@:expose("nkParticle")
 class Particle {
 
     public var index : Int;

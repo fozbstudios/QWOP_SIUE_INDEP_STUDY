@@ -12,6 +12,7 @@ import phoenix.geometry.TextGeometry;
 
 typedef TextAlign = phoenix.BitmapFont.TextAlign;
 
+@:expose("nkText")
 class Text extends Visual {
 
         public var geom : TextGeometry;

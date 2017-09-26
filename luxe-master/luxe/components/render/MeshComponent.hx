@@ -7,6 +7,7 @@ import luxe.options.MeshOptions;
 
 import luxe.Log.*;
 
+@:expose("nkMeshComponent")
 class MeshComponent extends Component {
 
     public var mesh : Mesh;

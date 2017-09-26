@@ -12,6 +12,7 @@ package luxe.structural;
 */
 
 @:generic
+@:expose("nkBag")
 class Bag<T> {
 
         /** The length of this stack. If 0, the stack is empty */

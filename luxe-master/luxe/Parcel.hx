@@ -71,6 +71,7 @@ typedef ParcelList = {
     var loaded = 2;
 }
 
+@:expose("nkParcel")
 class Parcel {
 
         /** The parent Resources system this Parcel is contained by. */
