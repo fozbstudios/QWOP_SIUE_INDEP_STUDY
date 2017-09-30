@@ -1,3 +1,4 @@
+var world
 ! function() {
     var Rglobal={
     "timestamp": 13243.240000000002,
@@ -590,9 +591,8 @@ console.save = function(data, filename){
             });
             socket.emit('serverReady');
         },
-        create_world: function() {
-           // console.log(mainBoiMouseEmit);
-            //console.log(Rglobal)
+      create_world: function() {
+        world = this
             var t = 640,
                 e = 400,
                 s = m.resources.cache.get("assets/sprintbg.jpg");
@@ -975,14 +975,15 @@ console.save = function(data, filename){
             null != this.bevelShaderBody && (C = this.torso._components.get("physicsBody", !1), this.bevelShaderBody.set_vector2("lightVec", new I.Vector(-Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderHead && (C = this.head._components.get("physicsBody", !1), this.bevelShaderHead.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightArm && (C = this.rightArm._components.get("physicsBody", !1), this.bevelShaderRightArm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftArm && (C = this.leftArm._components.get("physicsBody", !1), this.bevelShaderLeftArm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightForearm && (C = this.rightForearm._components.get("physicsBody", !1), this.bevelShaderRightForearm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftForearm && (C = this.leftForearm._components.get("physicsBody", !1), this.bevelShaderLeftForearm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightThigh && (C = this.rightThigh._components.get("physicsBody", !1), this.bevelShaderRightThigh.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftThigh && (C = this.leftThigh._components.get("physicsBody", !1), this.bevelShaderLeftThigh.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightCalf && (C = this.rightCalf._components.get("physicsBody", !1), this.bevelShaderRightCalf.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftCalf && (C = this.leftCalf._components.get("physicsBody", !1), this.bevelShaderLeftCalf.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), 1 == this.jumpLanded && 0 == this.gameEnded ? (this.pause = !0, this.endGame()) : 0 == this.jumpLanded && 0 == this.gameEnded && 1 == this.fallen && this.endGame()
         },
         beginContact: function(t) {
-            var e = this,
-                s = t.getFixtureB().getBody(),
-                i = t.getFixtureA().getBody(),
-                n = s.getUserData(),
-                r = i.getUserData(),
-                a = new p.collision.B2WorldManifold,
-                h = -1e5,
-                c = -1e3;
+          var e = this,
+              gamestate = this,
+              s = t.getFixtureB().getBody(),
+              i = t.getFixtureA().getBody(),
+              n = s.getUserData(),
+              r = i.getUserData(),
+              a = new p.collision.B2WorldManifold,
+              h = -1e5,
+              c = -1e3;
             t.getWorldManifold(a);
             for (var _ = a.m_points, u = 0; u < _.length;) {
                 var d = _[u];
