@@ -352,17 +352,14 @@ var world
             }
         },
         emit: function(t, e) {
-             this._check();
+            this._check();
             var s = this.bindings.get(t);
             if (null != s && s.length > 0)
-                for (var i = 0; i < s.length; ) {
+                for (var i = 0; i < s.length;) {
                     var n = s[i];
-                    ++i,
-                    n(e)
+                    ++i, n(e)
                 }
             this._check()
-            
-         
         },
         on: function(t, e) {
             if (this._check(), this.bindings.exists(t)) {
@@ -537,6 +534,7 @@ var world
             }), this.doneLoading = !0,
             socket.on('aiReady',function(){
                 //console.log(mainBoiMouseEmit);
+              //  mainBoiMouseEmit(15,Rglobal);
                 //mainBoiMouseGameOnMouseDown(Rglobal);
                 //mainBoiMouseEmit.Emitter.emit(15, Rglobal);
                  //mainBoiMouseEmit.game.onmousedown(Rglobal);
@@ -1006,12 +1004,12 @@ var world
         },
         onmousedown: function(t) {
             if (0 != this.doneLoading) {
-                if (0 == this.firstClick && 1 == this.doneLoading && (this.firstClick = !0, /*this.intro.destroy(), this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)),*/ this.scoreTime = 0), 1 == this.helpUp && (this.helpUp = !1, this.pause = !1, /*this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)),*/ this.help.set_pos(new I.Vector(-1e4, -1e4))) /*this.muteButton.point_inside(t.pos)*/) {
+                if (0 == this.firstClick && 1 == this.doneLoading && (this.firstClick = !0, /*this.intro.destroy(), this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)),*/ this.scoreTime = 0), 1 == this.helpUp && (this.helpUp = !1, this.pause = !1, /*this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)),*/ this.help.set_pos(new I.Vector(-1e4, -1e4))), this.muteButton.point_inside(t.pos)) {
                     this.mute = !this.mute;
                     var e;
                     0 == this.mute ? (e = this.uiData.frames[8], m.audio.volume("ehh", 1), m.audio.volume("crunch", 1)) : (e = this.uiData.frames[9], m.audio.volume("ehh", 0), m.audio.volume("crunch", 0)), this.muteButton.set_uv(e.uv), this.muteButton.set_size(new I.Vector(e.spriteSourceSize.w, e.spriteSourceSize.h))
                 }
-                /*this.helpButton.point_inside(t.pos) && */(this.pause = !0, this.helpUp = !0, /*this.blackSquare.set_pos(new I.Vector(this.world_camera.get_pos().x, this.world_camera.get_pos().y)),*/ this.help.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)));
+                this.helpButton.point_inside(t.pos) && (this.pause = !0, this.helpUp = !0, /*this.blackSquare.set_pos(new I.Vector(this.world_camera.get_pos().x, this.world_camera.get_pos().y)),*/ this.help.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)));
                 var s = ["ios", "android"]; - 1 == h.indexOf(s, m.core.app.os, 0) && (this.QButton.point_inside(t.pos) && (this.QDown = !0, this.mouseClicked = "Q"), this.WButton.point_inside(t.pos) && (this.WDown = !0, this.mouseClicked = "W"), this.OButton.point_inside(t.pos) && (this.ODown = !0, this.mouseClicked = "O"), this.PButton.point_inside(t.pos) && (this.PDown = !0, this.mouseClicked = "P"))
               console.log(2);
         console.trace();
