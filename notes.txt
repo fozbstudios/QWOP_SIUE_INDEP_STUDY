@@ -1,8 +1,2 @@
 dockerize???
-first algo random q, w, o, p(multiple buttons down at once allowed) record sequence, duration of press
-next( record based on angle(likely require extensive js moding)
-
-should we package durantion with message or send a continuus stream(probablky first opt)
-(even with durantion should quueue events in batches to prevent input lag)
-
-adding stuff 
+next( reward based on angle to ground, and or speed of movement(likely require extensive js moding)
