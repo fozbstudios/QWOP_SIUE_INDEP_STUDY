@@ -22,11 +22,18 @@ def static_proxy(path):
 @socketio.on('connect')
 def hc():
     print('connect\n\n\n')
+#@socketio.on('current score')
+#def hc(cs):
+    #print(repr(cs) +'\n\n\n')
+@socketio.on('final score')
+def hc(cs):
+    print(repr(cs) +'\n\n\n')
     
 @socketio.on('serverReady')
 def hc():
     print('clicking\n\n\n')
     socketio.emit('aiReady')
+    socketio.emit('pressP')
 if __name__ == '__main__':
     socketio.run(app)
     

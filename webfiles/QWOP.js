@@ -1,55 +1,6 @@
+var world
 ! function() {
-    var Rglobal={
-    "timestamp": 13243.240000000002,
-    "window_id": 1,
-    "state": [
-        "down",
-        2
-    ],
-    "button": 1,
-    "x": 397,
-    "y": 186,
-    "xrel": 397,
-    "yrel": 186,
-    "pos": {
-        "_construct": false,
-        "ignore_listeners": false,
-        "w": 0,
-        "z": 0,
-        "y": 186,
-        "x": 397
-    }
-}
-    var mainBoiMouseEmit
-    var mainBoiMouseGameOnMouseDown
-
-
-    (function(console){
-
-console.save = function(data, filename){
-
-    if(!data) {
-        console.error('Console.save: No data')
-        return;
-    }
-
-    if(!filename) filename = 'console.json'
-
-    if(typeof data === "object"){
-        data = JSON.stringify(data, undefined, 4)
-    }
-
-    var blob = new Blob([data], {type: 'text/json'}),
-        e    = document.createEvent('MouseEvents'),
-        a    = document.createElement('a')
-
-    a.download = filename
-    a.href = window.URL.createObjectURL(blob)
-    a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':')
-    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-    a.dispatchEvent(e)
- }
-})(console)
+   
     function t(t, e) {
         function s() {}
         s.prototype = t;
@@ -586,16 +537,15 @@ console.save = function(data, filename){
             }), this.doneLoading = !0,
             socket.on('aiReady',function(){
                 //console.log(mainBoiMouseEmit);
-              mainBoiMouseEmit(15,Rglobal);
                 //mainBoiMouseGameOnMouseDown(Rglobal);
                 //mainBoiMouseEmit.Emitter.emit(15, Rglobal);
                  //mainBoiMouseEmit.game.onmousedown(Rglobal);
             });
             socket.emit('serverReady');
+            world.firstClick=true;
         },
-        create_world: function() {
-           // console.log(mainBoiMouseEmit);
-            //console.log(Rglobal)
+      create_world: function() {
+        world = this
             var t = 640,
                 e = 400,
                 s = m.resources.cache.get("assets/sprintbg.jpg");
@@ -914,6 +864,10 @@ console.save = function(data, filename){
             //&& (this.fallenEnding.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)), this.gameOverText.set_text("" + this.score + " metres"), this.gameOverText.set_pos(new I.Vector(this.fallenEnding.get_pos().x, this.fallenEnding.get_pos().y - 10)), this.gameEnded = !0)
         },
         reset: function() {
+            world.QDown=false;
+            world.WDown=false;
+            world.ODown=false;
+            world.PDown=false;
             document.getElementById("LRscore").innerHTML = this.score, sendFinScore(this.score), this.score = 0, this.scoreTime = 0,  this.bestText.set_text("Best: " + this.highScore + "m"), this.world_camera.get_pos().set_x(-10 * l.worldScale), this.world_camera.get_pos().set_y(-200), this.ui_camera.get_pos().set_x(0), this.ui_camera.get_pos().set_y(0), this.m_world.destroyJoint(this.neck), this.m_world.destroyJoint(this.leftShoulder), this.m_world.destroyJoint(this.leftElbow), this.m_world.destroyJoint(this.leftHip), this.m_world.destroyJoint(this.leftKnee), this.m_world.destroyJoint(this.leftAnkle), this.m_world.destroyJoint(this.rightShoulder), this.m_world.destroyJoint(this.rightElbow), this.m_world.destroyJoint(this.rightHip), this.m_world.destroyJoint(this.rightKnee), this.m_world.destroyJoint(this.rightAnkle), null != this.hurdleJoint && (this.m_world.destroyJoint(this.hurdleJoint), this.hurdleJoint = null, this.hurdleBase.destroy(), this.hurdleTop.destroy()), this.torso.destroy(), this.head.destroy(), this.leftArm.destroy(), this.leftForearm.destroy(), this.leftThigh.destroy(), this.leftCalf.destroy(), this.leftFoot.destroy(), this.rightArm.destroy(), this.rightForearm.destroy(), this.rightThigh.destroy(), this.rightCalf.destroy(), this.rightFoot.destroy(), this.world_camera.get_pos().set_x(this.world_camera_offset * l.worldScale), this.m_world.setGravity(new p.common.math.B2Vec2(0, l.gravity)), this.fallenEnding.set_pos(new I.Vector(-1e4, -1e4)), this.jumpEnding.set_pos(new I.Vector(-1e4, -1e4)), this.help.set_pos(new I.Vector(-1e4, -1e4)), /*this.blackSquare.set_pos(new I.Vector(-1e4, -1e4)),*/ this.gameOverText.set_pos(new I.Vector(-1e4, -1e4)), this.highScore > 1 && this.highScore < l.sandPitAt / l.worldScale * .1 - 1 ? (this.hsLine.get_pos().set_x(this.highScore * l.worldScale * 10), this.bestLineText.get_pos().set_x(this.hsLine.get_pos().x), this.bestLineText.set_text("Best: " + this.highScore + "m")) : this.highScore < l.sandPitAt / l.worldScale * .1 - 1 && (this.hsLine.get_pos().set_x(-1e4), this.bestLineText.get_pos().set_x(this.hsLine.get_pos().x), this.bestLineText.set_text("Best: " + this.highScore + "m"));
             for (var t = 0, e = this.speedArray; t < e.length;) {
                 {
@@ -978,14 +932,15 @@ console.save = function(data, filename){
             null != this.bevelShaderBody && (C = this.torso._components.get("physicsBody", !1), this.bevelShaderBody.set_vector2("lightVec", new I.Vector(-Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderHead && (C = this.head._components.get("physicsBody", !1), this.bevelShaderHead.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightArm && (C = this.rightArm._components.get("physicsBody", !1), this.bevelShaderRightArm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftArm && (C = this.leftArm._components.get("physicsBody", !1), this.bevelShaderLeftArm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightForearm && (C = this.rightForearm._components.get("physicsBody", !1), this.bevelShaderRightForearm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftForearm && (C = this.leftForearm._components.get("physicsBody", !1), this.bevelShaderLeftForearm.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightThigh && (C = this.rightThigh._components.get("physicsBody", !1), this.bevelShaderRightThigh.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftThigh && (C = this.leftThigh._components.get("physicsBody", !1), this.bevelShaderLeftThigh.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderRightCalf && (C = this.rightCalf._components.get("physicsBody", !1), this.bevelShaderRightCalf.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), null != this.bevelShaderLeftCalf && (C = this.leftCalf._components.get("physicsBody", !1), this.bevelShaderLeftCalf.set_vector2("lightVec", new I.Vector(Math.cos(C.getAngle() - 1), Math.sin(C.getAngle() - 1)))), 1 == this.jumpLanded && 0 == this.gameEnded ? (this.pause = !0, this.endGame()) : 0 == this.jumpLanded && 0 == this.gameEnded && 1 == this.fallen && this.endGame()
         },
         beginContact: function(t) {
-            var e = this,
-                s = t.getFixtureB().getBody(),
-                i = t.getFixtureA().getBody(),
-                n = s.getUserData(),
-                r = i.getUserData(),
-                a = new p.collision.B2WorldManifold,
-                h = -1e5,
-                c = -1e3;
+          var e = this,
+              gamestate = this,
+              s = t.getFixtureB().getBody(),
+              i = t.getFixtureA().getBody(),
+              n = s.getUserData(),
+              r = i.getUserData(),
+              a = new p.collision.B2WorldManifold,
+              h = -1e5,
+              c = -1e3;
             t.getWorldManifold(a);
             for (var _ = a.m_points, u = 0; u < _.length;) {
                 var d = _[u];
@@ -6133,8 +6088,7 @@ C.App = function() {
     },
 
     render: function() {
-        this.shutting_down || this.inited && (this.debug.end(o.Tag.renderdt), this.debug.start(o.Tag.renderdt), this.headless || (this.debug.start(o.Tag.render), this.emitter.emit(7), this.game.onprerender(), this.emitter.emit(8), this.game.onrender(), this.renderer.process(), this.emitter.emit(9), this.game.onpostrender(), mainBoiMouseEmit=this.emitter.emit,mainBoiMouseGameOnMouseDown=this.game.onmousedown,
-        /*console.log("boi"),*/this.debug.end(o.Tag.render)))
+        this.shutting_down || this.inited && (this.debug.end(o.Tag.renderdt), this.debug.start(o.Tag.renderdt), this.headless || (this.debug.start(o.Tag.render), this.emitter.emit(7), this.game.onprerender(), this.emitter.emit(8), this.game.onrender(), this.renderer.process(), this.emitter.emit(9), this.game.onpostrender(), this.debug.end(o.Tag.render)))
     },
     show_console: function(t) {
         null == t && (t = !0), this.console_visible = t, this.debug.show_console(this.console_visible)
@@ -6221,20 +6175,13 @@ C.App = function() {
             //mainBoiMouseEmit=this;
           
             this.shutting_down || (this.input.check_named_mouse(r, !0), this.emitter.emit(15, r), this.game.onmousedown(r))
-            console.log(5);
-            console.log(this.emitter.emit)
-            mainBoiMouseEmit=this.emitter.emit;
-          //  console.save(r,"Rglobal.json")
-           // console.save(mainBoiMouseEmit,"mainBoiMouseEmit.json")
-           console.log(mainBoiMouseEmit);
-           // console.log(this);
+            
         
         }
 
     },
     function(){
-        mainBoiMouseEmit=this.emitter.emit; 
-        console.log("boi")
+        
     },
 
     onmouseup: function(t, e, s, i, n) {
