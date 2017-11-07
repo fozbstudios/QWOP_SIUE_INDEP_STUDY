@@ -8,9 +8,11 @@ fi
 virtualenv QWOPaiVirtualEnv
 #activate vintualenv
 source QWOPaiVirtualEnv/bin/activate
-pip3 install flask
-pip3 install flask-socketio
-pip3 install tensorflow
+virtualenv --clear venv
+pip3 install --no-cache-dir flask
+pip3 install --no-cache-dir flask-socketio
+pip3 install --no-cache-dir -U socketIO-client
+pip3 install --no-cache-dir tensorflow
 
 
 
