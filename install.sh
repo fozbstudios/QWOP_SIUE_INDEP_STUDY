@@ -10,6 +10,7 @@ virtualenv QWOPaiVirtualEnv
 source QWOPaiVirtualEnv/bin/activate
 pip3 install flask
 pip3 install flask-socketio
+pip3 install tensorflow
 
 
 
