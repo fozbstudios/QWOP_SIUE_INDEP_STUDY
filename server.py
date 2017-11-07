@@ -1,4 +1,4 @@
-#!/Usr/bin/python
+#!/usr/bin/python
 import time
 from flask import Flask,request, redirect, url_for, send_from_directory
 
