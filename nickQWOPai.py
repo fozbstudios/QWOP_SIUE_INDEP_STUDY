@@ -70,7 +70,7 @@ class QWOPai:
                 gradBuffer[ix] = grad * 0
 
             while i < self.episodeTotal:
-                s = env.reset()
+                s = env.reset() #start one round of the game here
                 running_reward = 0
                 ep_history = []
                 for j in range(self.numEpsInBatch):
@@ -80,9 +80,9 @@ class QWOPai:
                     a = np.argmax(a_dist == a)
 
                     s1,r,d,_ = env.step(a) #Get our reward for taking an action given a bandit.
-                    ep_history.append([s,a,r,s1])
+                    ep_history.append([s,a,r,s1]) #s=prevState, action, reward nextState
                     s = s1
-                    running_reward += r
+                    running_reward += r #use fuction for reward
                     if d == True:
                         #Update the network.
                         ep_history = np.array(ep_history)
@@ -92,7 +92,7 @@ class QWOPai:
                         grads = sess.run(self.agent.gradients, feed_dict=feed_dict)
                         for idx,grad in enumerate(grads):
                             gradBuffer[idx] += grad
-
+    
                         if i % self.updateFreq == 0 and i != 0:
                             feed_dict=dict(zip(self.agent.gradient_holders, gradBuffer))= sess.run(self.agent.update_batch, feed_dict=feed_dict)
                             for ix,grad in enumerate(gradBuffer):
