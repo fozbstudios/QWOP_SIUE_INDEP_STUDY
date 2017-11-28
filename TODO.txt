@@ -19,7 +19,6 @@ Stuff that Nick and I still need to do:
 		       Best approach right now is to keep an array of 4 keys and each time we choose a new action, incriment the appropriate count and then once
 		       the timer reaches zero, release that key
 
-
-	
+	Changing the for loop, instead of running a length of max_ep, we are going to have the loop run until the qwop game is terminated (failure or death)	
 
 	
