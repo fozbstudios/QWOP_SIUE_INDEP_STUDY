@@ -13,7 +13,7 @@ if  $cond1 || $cond2; then
     source ./QWOPaiVirtualEnv/bin/activate
     pip3 install --no-cache-dir flask
     pip3 install --no-cache-dir flask-socketio
-    pip3 install --upgrade --force-reinstall socketIO-client-2
+    pip3 install socketIO-client-2
     pip3 install --no-cache-dir tensorflow
     source "" &> /dev/null #clear source
 else

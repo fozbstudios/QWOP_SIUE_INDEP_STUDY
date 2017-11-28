@@ -1,2 +1,0 @@
-dockerize???
-next( reward based on angle to ground, and or speed of movement(likely require extensive js moding)
