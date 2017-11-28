@@ -22,3 +22,4 @@ Stuff that Nick and I still need to do:
 	Changing the for loop, instead of running a length of max_ep, we are going to have the loop run until the qwop game is terminated (failure or death)	
 
 	
+figure out line 87-102 weight update
