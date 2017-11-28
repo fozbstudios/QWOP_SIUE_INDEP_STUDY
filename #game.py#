@@ -13,7 +13,7 @@ class QWOP:
 		self.max_frames_per_episode = MAX_FRAMES_PER_EPISODE
 		self.frame_skip = 4
                 self.gameOver = false
-		#self.screen_width, self.screen_height = self.getScreenDimensions()
+		self.screen_width, self.screen_height = self.getScreenDimensions()
 		self.legal_actions = [] #Need to put all of socket calls here
 		self.action_map = dict()
 		for i in range(leng(self.legal_actions)):
@@ -21,10 +21,11 @@ class QWOP:
 			
 		print len(self.legal_actions) #just to make sure that all 8 actions are there
 		
-		#self.windowname = GAME_NAME
-		#cv2.startWindowThread()
-		#cv2.namedWindow(GAME_NAME)
-		
+		self.windowname = GAME_NAME
+		cv2.startWindowThread()
+		cv2.namedWindow(GAME_NAME)
+
+                
 	def get_image(self):
 		numpy_surface = np.zeros(self.screen_height*self.screen_width*3, dtype=np.uint8)
 		self.getScreenRGB(numpy_surface)
