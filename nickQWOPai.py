@@ -37,7 +37,7 @@ class Agent():
 
 class QWOPai:
     def calcReward(self):
-        qio.curScore / (qio.tickcount + 1) 
+        self.qio.curScore / (self.qio.tickCount + 1) 
     def __init__(self):
         self.qio=QWOPInputOutput()
         self.gamma = 0.99
@@ -91,7 +91,7 @@ class QWOPai:
                     ep_history.append([self.qio.curScore,a,r,self.qio.tickCount]) #s=prevState, action, reward nextState
                     
                     # running_reward += r #use fuction for reward
-                    running_reward=calcReward();
+                    running_reward=self.calcReward();
                     #Update the network.
                 ep_history = np.array(ep_history)
                 ep_history[:,2] = self.discount_rewards(ep_history[:,2])
