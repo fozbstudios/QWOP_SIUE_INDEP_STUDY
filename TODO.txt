@@ -23,3 +23,7 @@ Stuff that Nick and I still need to do:
 
 	
 figure out line 87-102 weight update
+
+need to edit line 81-84 to not be random selection of action
+
+Line 75 Needs updated since it still has env.reset(), needs to reset QWOP instead

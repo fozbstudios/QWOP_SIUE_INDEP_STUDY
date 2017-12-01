@@ -36,8 +36,8 @@ class Agent():
         self.update_batch = optimizer.apply_gradients(zip(self.gradient_holders,tvars))
 
 class QWOPai:
-    def calcReward():
-        qio.currscore / (qio.tickcount + 1) 
+    def calcReward(self):
+        qio.curScore / (qio.tickcount + 1) 
     def __init__(self):
         self.qio=QWOPInputOutput()
         self.gamma = 0.99
@@ -71,21 +71,25 @@ class QWOPai:
                 gradBuffer[ix] = grad * 0
 
             while i < self.episodeTotal:
-                s = env.reset() #start one round of the game here
+                #THIS needs to be updated to reset QWOP
+                #s = env.reset() #start one round of the game here
                 running_reward = 0
                 ep_history = []
                 while self.qio.died==True:#game hasn't started restarted
                     a=3; #basically stuck in this loop til died changes
                     
                 while self.qio.died==False:
+                    #Will Need to change these eventually
                     #Probabilistically pick an action given our network outputs.
-                   a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
-                   a = np.random.choice(a_dist[0],p=a_dist[0])
-                   a = np.argmax(a_dist == a)
-
-                    s1,r,d,_ = env.step(a) #Get our reward for taking an action given a bandit.
-                    ep_history.append([s,a,r,s1]) #s=prevState, action, reward nextState
-                    s = s1
+                    a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
+                    a = np.random.choice(a_dist[0],p=a_dist[0])
+                    a = np.argmax(a_dist == a)
+                    
+                    self.qio.actionChooser(a)
+                    
+                    #Get our reward for taking an action given a bandit.
+                    ep_history.append([self.qio.curScore,a,r,self.qio.tickCount]) #s=prevState, action, reward nextState
+                    
                     # running_reward += r #use fuction for reward
                     running_reward=calcReward();
                     #Update the network.
@@ -98,7 +102,8 @@ class QWOPai:
                     gradBuffer[idx] += grad
 
                 if i % self.updateFreq == 0 and i != 0:
-                    feed_dict=dict(zip(self.agent.gradient_holders, gradBuffer))= sess.run(self.agent.update_batch, feed_dict=feed_dict)
+                    feed_dict=dict(zip(self.agent.gradient_holders, gradBuffer))
+                    _ = sess.run(self.agent.update_batch, feed_dict=feed_dict)
                     for ix,grad in enumerate(gradBuffer):
                         gradBuffer[ix] = grad * 0
 
@@ -110,5 +115,3 @@ class QWOPai:
                     print(np.mean(total_reward[-100:]))
                     i += 1
 
-    # def step(action):
-        
