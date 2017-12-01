@@ -12,7 +12,7 @@ class Agent():
         self.state_in= tf.placeholder(shape=[None,s_size],dtype=tf.float32)
         hidden = slim.fully_connected(self.state_in,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
         self.output = slim.fully_connected(hidden,a_size,activation_fn=tf.nn.softmax,biases_initializer=None)
-        self.chosen_action = tf.argmax(self.output,1)
+        self.chosen_action = tf.argmax(self.output,0)
 
         #The next six lines establish the training proceedure. We feed the reward and chosen action into the network
         #to compute the loss, and use it to update the network.
@@ -35,8 +35,9 @@ class Agent():
         optimizer = tf.train.AdamOptimizer(learning_rate=lr)
         self.update_batch = optimizer.apply_gradients(zip(self.gradient_holders,tvars))
 
-
 class QWOPai:
+    def calcReward():
+        qio.currscore / (qio.tickcount + 1) 
     def __init__(self):
         self.qio=QWOPInputOutput()
         self.gamma = 0.99
@@ -73,7 +74,10 @@ class QWOPai:
                 s = env.reset() #start one round of the game here
                 running_reward = 0
                 ep_history = []
-                for j in range(self.numEpsInBatch):
+                while self.qio.died==True:#game hasn't started restarted
+                   a=3; #basically stuck in this loop til died changes
+                    
+                while self.qio.died==False:
                     #Probabilistically pick an action given our network outputs.
                     a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
                     a = np.random.choice(a_dist[0],p=a_dist[0])
@@ -82,28 +86,29 @@ class QWOPai:
                     s1,r,d,_ = env.step(a) #Get our reward for taking an action given a bandit.
                     ep_history.append([s,a,r,s1]) #s=prevState, action, reward nextState
                     s = s1
-                    running_reward += r #use fuction for reward
-                    if d == True:
-                        #Update the network.
-                        ep_history = np.array(ep_history)
-                        ep_history[:,2] = self.discount_rewards(ep_history[:,2])
-                        feed_dict={self.agent.reward_holder:ep_history[:,2],
-                                self.agent.action_holder:ep_history[:,1],self.agent.state_in:np.vstack(ep_history[:,0])}
-                        grads = sess.run(self.agent.gradients, feed_dict=feed_dict)
-                        for idx,grad in enumerate(grads):
-                            gradBuffer[idx] += grad
-    
-                        if i % self.updateFreq == 0 and i != 0:
-                            feed_dict=dict(zip(self.agent.gradient_holders, gradBuffer))= sess.run(self.agent.update_batch, feed_dict=feed_dict)
-                            for ix,grad in enumerate(gradBuffer):
-                                gradBuffer[ix] = grad * 0
+                    # running_reward += r #use fuction for reward
+                    running_reward=calcReward();
+                #Update the network.
+                ep_history = np.array(ep_history)
+                ep_history[:,2] = self.discount_rewards(ep_history[:,2])
+                feed_dict={self.agent.reward_holder:ep_history[:,2],
+                            self.agent.action_holder:ep_history[:,1],self.agent.state_in:np.vstack(ep_history[:,0])}
+                grads = sess.run(self.agent.gradients, feed_dict=feed_dict)
+                for idx,grad in enumerate(grads):
+                    gradBuffer[idx] += grad
 
-                        total_reward.append(running_reward)
-                        total_length.append(j)
-                        break
+                if i % self.updateFreq == 0 and i != 0:
+                    feed_dict=dict(zip(self.agent.gradient_holders, gradBuffer))= sess.run(self.agent.update_batch, feed_dict=feed_dict)
+                    for ix,grad in enumerate(gradBuffer):
+                        gradBuffer[ix] = grad * 0
+
+                total_reward.append(running_reward)
 
 
-                    #Update our running tally of scores.
+                #Update our running tally of scores.
                 if i % 100 == 0:
                     print(np.mean(total_reward[-100:]))
-                i += 1
+                    i += 1
+
+    # def step(action):
+        
