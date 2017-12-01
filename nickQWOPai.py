@@ -75,24 +75,24 @@ class QWOPai:
                 running_reward = 0
                 ep_history = []
                 while self.qio.died==True:#game hasn't started restarted
-                   a=3; #basically stuck in this loop til died changes
+                    a=3; #basically stuck in this loop til died changes
                     
                 while self.qio.died==False:
                     #Probabilistically pick an action given our network outputs.
-                    a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
-                    a = np.random.choice(a_dist[0],p=a_dist[0])
-                    a = np.argmax(a_dist == a)
+                   a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
+                   a = np.random.choice(a_dist[0],p=a_dist[0])
+                   a = np.argmax(a_dist == a)
 
                     s1,r,d,_ = env.step(a) #Get our reward for taking an action given a bandit.
                     ep_history.append([s,a,r,s1]) #s=prevState, action, reward nextState
                     s = s1
                     # running_reward += r #use fuction for reward
                     running_reward=calcReward();
-                #Update the network.
+                    #Update the network.
                 ep_history = np.array(ep_history)
                 ep_history[:,2] = self.discount_rewards(ep_history[:,2])
                 feed_dict={self.agent.reward_holder:ep_history[:,2],
-                            self.agent.action_holder:ep_history[:,1],self.agent.state_in:np.vstack(ep_history[:,0])}
+                           self.agent.action_holder:ep_history[:,1],self.agent.state_in:np.vstack(ep_history[:,0])}
                 grads = sess.run(self.agent.gradients, feed_dict=feed_dict)
                 for idx,grad in enumerate(grads):
                     gradBuffer[idx] += grad
