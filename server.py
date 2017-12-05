@@ -8,7 +8,6 @@ from flask_socketio import SocketIO
 class QWOPInputOutput:
     def __init__(self):
         #self.app = Flask(__name__,static_folder='webfiles');
-        self.socketio = SocClient('localhost',5000)
         self.died=True
         self.curScore=0
         self.tickCount=0
@@ -19,52 +18,7 @@ class QWOPInputOutput:
         self.PPressed=False
         self.firstRun=True
         self.keyDurations=array('Q',[0,0,0,0]) # unsigned long long 
-
-
-        self.socketio.on('connect', self.con)
-        self.socketio.on('final score',self.fsf)
-        self.socketio.on('current score', self.csf)
-        self.socketio.on('serverReady',self.srf)
-    def srf(self):
-        # print('clicking\n\n\n')
-        self.died=False
-        if self.firstRun==True:
-            self.socketio.emit('aiReady')
-    def con(self):
-        print('connect\n\n\n')
-        #self.socketio.on('current score')
-        #def hc(cs):
-        #print(repr(cs) +'\n\n\n')
-        self.firstRun=False
-    def fsf(self, fs):
-        #print(repr(cs) +'\n\n\n')
-        self.finScore=fs
-        self.QPressed=False
-        self.WPressed=False
-        self.OPressed=False
-        self.PPressed=False
-        self.curScore=0
-        self.tickCount=0
-        self.died=True
-
-    def csf(self, cs):
-        self.curScore=cs
-        self.tickCount+=1
-        for i in range(len(self.keyDurations)):
-            if self.keyDurations[i] >0:
-                self.keyDurations[i] -= 1
-            if self.keyDurations[i]<0:
-                self.keyDurations[i] += 1
-            # if self.keyDurations[i]<=0:
-            #     if i==0:
-            #         self.controlManage("rQ")
-            #     elif i==1:
-            #         self.controlManage("rW")
-            #     elif i==2:
-            #         self.controlManage("rO")
-            #     elif i==3:
-            #         self.controlManage("rP")
-
+        self.socketio=0;
 
     def controlManage(self, eventStr):
         if eventStr=="pQ":
@@ -93,8 +47,9 @@ class QWOPInputOutput:
         self.controlManage("rO")
         self.controlManage("rP")
         if actionNum==0: #do nothing
-            for item in self.keyDurations:
-                # item-=tickDuration
+            a=3;
+            # for item in self.keyDurations:
+            # item-=tickDuration
         elif actionNum == 1: #Q
             self.controlManage("pQ")
             # self.keyDurations[0]+=tickDuration
@@ -174,6 +129,56 @@ class QWOPInputOutput:
             # self.keyDurations[2]+=tickDuration
             self.controlManage("pP")
             # self.keyDurations[3]+=tickDuration
+
+    def connectAI(self):
+        self.socketio = SocClient('localhost',5000)
+        self.socketio.on('connect', self.con)
+        self.socketio.on('final score',self.fsf)
+        self.socketio.on('current score', self.csf)
+        self.socketio.on('serverReady',self.srf)
+    def srf(self):
+        # print('clicking\n\n\n')
+        self.died=False
+        if self.firstRun==True:
+            self.socketio.emit('aiReady')
+    def con(self):
+        print('connect\n\n\n')
+        #self.socketio.on('current score')
+        #def hc(cs):
+        #print(repr(cs) +'\n\n\n')
+        self.firstRun=False
+    def fsf(self, fs):
+        #print(repr(cs) +'\n\n\n')
+        self.finScore=fs
+        self.QPressed=False
+        self.WPressed=False
+        self.OPressed=False
+        self.PPressed=False
+        self.curScore=0
+        self.tickCount=0
+        self.died=True
+
+    def csf(self, cs):
+        self.curScore=cs
+        self.tickCount+=1
+        for i in range(len(self.keyDurations)):
+            if self.keyDurations[i] >0:
+                self.keyDurations[i] -= 1
+            if self.keyDurations[i]<0:
+                self.keyDurations[i] += 1
+            # if self.keyDurations[i]<=0:
+            #     if i==0:
+            #         self.controlManage("rQ")
+            #     elif i==1:
+            #         self.controlManage("rW")
+            #     elif i==2:
+            #         self.controlManage("rO")
+            #     elif i==3:
+            #         self.controlManage("rP")
+
+
+
+
 if __name__ == '__main__':
     app = Flask(__name__,static_folder='webfiles')
 
@@ -208,3 +213,7 @@ if __name__ == '__main__':
         socketiorunner.emit("pressP")
         socketiorunner.emit("pressP")
         socketiorunner.emit("pressP")
+
+    @socketiorunner.on("serverReady")
+    def cc():
+        print("server recieved connection")

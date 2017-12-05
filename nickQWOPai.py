@@ -9,15 +9,15 @@ from .server import QWOPInputOutput
 class Agent():
     def __init__(self, lr, s_size,a_size,h_size):
         #These lines established the feed-forward part of the network. The agent takes a state and produces an action.
-        self.state_in= tf.placeholder(shape=[None,s_size],dtype=tf.float32)
+        self.state_in= tf.placeholder(shape=[4],dtype=tf.bool)
         hidden = slim.fully_connected(self.state_in,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
         self.output = slim.fully_connected(hidden,a_size,activation_fn=tf.nn.softmax,biases_initializer=None)
         self.chosen_action = tf.argmax(self.output,0)
 
         #The next six lines establish the training proceedure. We feed the reward and chosen action into the network
         #to compute the loss, and use it to update the network.
-        self.reward_holder = tf.placeholder(shape=[None],dtype=tf.float64)
-        self.action_holder = tf.placeholder(shape=[16],dtype=tf.int64) #1d array with length 16
+        self.reward_holder = tf.placeholder(shape=[],dtype=tf.float64)
+        self.action_holder = tf.placeholder(shape=[],dtype=tf.int64) #1d array with length 16
 
         self.indexes = tf.range(0, tf.shape(self.output)[0]) * tf.shape(self.output)[1] + self.action_holder
         self.responsible_outputs = tf.gather(tf.reshape(self.output, [-1]), self.indexes)
@@ -72,7 +72,7 @@ class QWOPai:
 
             while i < self.episodeTotal:
                 #THIS needs to be updated to reset QWOP
-                #s = env.reset() #start one round of the game here
+                s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
                 running_reward = 0
                 ep_history = []
                 while self.qio.died==True:#game hasn't started restarted
@@ -81,17 +81,23 @@ class QWOPai:
                 while self.qio.died==False:
                     #Will Need to change these eventually
                     #Probabilistically pick an action given our network outputs.
-                    a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
-                    a = np.random.choice(a_dist[0],p=a_dist[0])
-                    a = np.argmax(a_dist == a)
-                    
+                    # a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
+                    # a = np.random.choice(a_dist[0],p=a_dist[0])
+                    # a = np.argmax(a_dist == a)
+                    # self.qio.actionChooser(a)
+                    nonRandActionProbability=min(.98,.2+i/self.episodeTotal);
+                    s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
+                    if np.random.rand(1)<nonRandActionProbability: #choose random action
+                        a=np.random.randint(16,size=1)[0]
+                    else:
+                        aDist=sess.run(self.agent.output,feed_dict={self.agent.state_in:s}) #use our net to rank actions
+                        a=np.argmax(aDist) #choose best action
                     self.qio.actionChooser(a)
-                    
-                    #Get our reward for taking an action given a bandit.
-                    ep_history.append([self.qio.curScore,a,r,self.qio.tickCount]) #s=prevState, action, reward nextState
-                    
+                    s1 = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
                     # running_reward += r #use fuction for reward
                     running_reward=self.calcReward();
+                    #Get our reward for taking an action given a bandit.
+                    ep_history.append([s,a,running_reward,s1]) #s=prevState, action, reward nextState
                     #Update the network.
                 ep_history = np.array(ep_history)
                 ep_history[:,2] = self.discount_rewards(ep_history[:,2])
