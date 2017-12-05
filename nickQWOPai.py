@@ -16,8 +16,8 @@ class Agent():
 
         #The next six lines establish the training proceedure. We feed the reward and chosen action into the network
         #to compute the loss, and use it to update the network.
-        self.reward_holder = tf.placeholder(shape=[None],dtype=tf.float32)
-        self.action_holder = tf.placeholder(shape=[None],dtype=tf.int32)
+        self.reward_holder = tf.placeholder(shape=[None],dtype=tf.float64)
+        self.action_holder = tf.placeholder(shape=[16],dtype=tf.int64) #1d array with length 16
 
         self.indexes = tf.range(0, tf.shape(self.output)[0]) * tf.shape(self.output)[1] + self.action_holder
         self.responsible_outputs = tf.gather(tf.reshape(self.output, [-1]), self.indexes)

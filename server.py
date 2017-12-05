@@ -55,15 +55,15 @@ class QWOPInputOutput:
                 self.keyDurations[i] -= 1
             if self.keyDurations[i]<0:
                 self.keyDurations[i] += 1
-            if self.keyDurations[i]<=0:
-                if i==0:
-                    self.controlManage("rQ")
-                elif i==1:
-                    self.controlManage("rW")
-                elif i==2:
-                    self.controlManage("rO")
-                elif i==3:
-                    self.controlManage("rP")
+            # if self.keyDurations[i]<=0:
+            #     if i==0:
+            #         self.controlManage("rQ")
+            #     elif i==1:
+            #         self.controlManage("rW")
+            #     elif i==2:
+            #         self.controlManage("rO")
+            #     elif i==3:
+            #         self.controlManage("rP")
 
 
     def controlManage(self, eventStr):
@@ -86,89 +86,94 @@ class QWOPInputOutput:
         else:# bad arg
             errStr="eventStr %s is undefined!" % eventStr
             raise NameError(errStr)
-    def actionChooser(self,actionNum,tickDuration):
+    # def actionChooser(self,actionNum,tickDuration):
+    def actionChooser(self,actionNum):
+        self.controlManage("rQ")
+        self.controlManage("rW")
+        self.controlManage("rO")
+        self.controlManage("rP")
         if actionNum==0: #do nothing
             for item in self.keyDurations:
-                item-=tickDuration
+                # item-=tickDuration
         elif actionNum == 1: #Q
             self.controlManage("pQ")
-            self.keyDurations[0]+=tickDuration
+            # self.keyDurations[0]+=tickDuration
         elif actionNum == 2: #W
             self.controlManage("pW")
-            self.keyDurations[1]+=tickDuration
+            # self.keyDurations[1]+=tickDuration
         elif actionNum == 3: #O
             self.controlManage("pO")
-            self.keyDurations[2]+=tickDuration
+            # self.keyDurations[2]+=tickDuration
         elif actionNum == 4: #P
             self.controlManage("pP")
-            self.keyDurations[3]+=tickDuration
+            # self.keyDurations[3]+=tickDuration
         elif actionNum == 5: #QW
             self.controlManage("pQ")
-            self.keyDurations[0]+=tickDuration
+            # self.keyDurations[0]+=tickDuration
             self.controlManage("pW")
-            self.keyDurations[1]+=tickDuration
+            # self.keyDurations[1]+=tickDuration
         elif actionNum == 6: #QO
             self.controlManage("pQ")
-            self.keyDurations[0]+=tickDuration
+            # self.keyDurations[0]+=tickDuration
             self.controlManage("pO")
-            self.keyDurations[2]+=tickDuration
+            # self.keyDurations[2]+=tickDuration
         elif actionNum == 7: #QP
             self.controlManage("pQ")
-            self.keyDurations[0]+=tickDuration
+            # self.keyDurations[0]+=tickDuration
             self.controlManage("pP")
-            self.keyDurations[3]+=tickDuration
+            # self.keyDurations[3]+=tickDuration
         elif actionNum == 8: #WO
             self.controlManage("pW")
-            self.keyDurations[1]+=tickDuration
+            # self.keyDurations[1]+=tickDuration
             self.controlManage("pO")
-            self.keyDurations[2]+=tickDuration
+            # self.keyDurations[2]+=tickDuration
         elif actionNum == 9: #WP
             self.controlManage("pW")
-            self.keyDurations[1]+=tickDuration
+            # self.keyDurations[1]+=tickDuration
             self.controlManage("pP")
-            self.keyDurations[3]+=tickDuration
+            # self.keyDurations[3]+=tickDuration
         elif actionNum == 10: #OP
             self.controlManage("pO")
-            self.keyDurations[2]+=tickDuration
+            # self.keyDurations[2]+=tickDuration
             self.controlManage("pP")
-            self.keyDurations[3]+=tickDuration
+            # self.keyDurations[3]+=tickDuration
         elif actionNum == 11: #QWO
             self.controlManage("pQ")
-            self.keyDurations[0]+=tickDuration
+            # self.keyDurations[0]+=tickDuration
             self.controlManage("pW")
-            self.keyDurations[1]+=tickDuration
+            # self.keyDurations[1]+=tickDuration
             self.controlManage("pO")
-            self.keyDurations[2]+=tickDuration
+            # self.keyDurations[2]+=tickDuration
         elif actionNum == 12: #QWP
             self.controlManage("pQ")
-            self.keyDurations[0]+=tickDuration
+            # self.keyDurations[0]+=tickDuration
             self.controlManage("pW")
-            self.keyDurations[1]+=tickDuration
+            # self.keyDurations[1]+=tickDuration
             self.controlManage("pP")
-            self.keyDurations[3]+=tickDuration
+            # self.keyDurations[3]+=tickDuration
         elif actionNum == 13: #QOP
             self.controlManage("pQ")
-            self.keyDurations[0]+=tickDuration
+            # self.keyDurations[0]+=tickDuration
             self.controlManage("pO")
-            self.keyDurations[2]+=tickDuration
+            # self.keyDurations[2]+=tickDuration
             self.controlManage("pP")
-            self.keyDurations[3]+=tickDuration
+            # self.keyDurations[3]+=tickDuration
         elif actionNum == 14: #WOP
             self.controlManage("pW")
-            self.keyDurations[1]+=tickDuration
+            # self.keyDurations[1]+=tickDuration
             self.controlManage("pO")
-            self.keyDurations[2]+=tickDuration
+            # self.keyDurations[2]+=tickDuration
             self.controlManage("pP")
-            self.keyDurations[3]+=tickDuration
+            # self.keyDurations[3]+=tickDuration
         elif actionNum == 15: #QWOP
             self.controlManage("pQ")
-            self.keyDurations[0]+=tickDuration
+            # self.keyDurations[0]+=tickDuration
             self.controlManage("pW")
-            self.keyDurations[1]+=tickDuration
+            # self.keyDurations[1]+=tickDuration
             self.controlManage("pO")
-            self.keyDurations[2]+=tickDuration
+            # self.keyDurations[2]+=tickDuration
             self.controlManage("pP")
-            self.keyDurations[3]+=tickDuration
+            # self.keyDurations[3]+=tickDuration
 if __name__ == '__main__':
     app = Flask(__name__,static_folder='webfiles')
 
