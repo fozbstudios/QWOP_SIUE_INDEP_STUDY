@@ -59,6 +59,7 @@ class QWOPai:
 
         # Launch the tensorflow graph
         with tf.Session() as sess:
+            writer = tf.summary.FileWriter("output", sess.graph)
             sess.run(init)
             i = 0
             total_reward = []
@@ -120,3 +121,4 @@ class QWOPai:
                     print(np.mean(total_reward[-100:]))
                     i += 1
 
+        writer.close()
