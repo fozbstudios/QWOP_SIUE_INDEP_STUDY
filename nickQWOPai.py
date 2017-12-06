@@ -7,15 +7,16 @@ from server import QWOPInputOutput
 class Agent():
     def __init__(self, lr, s_size,a_size,h_size):
         #These lines established the feed-forward part of the network. The agent takes a state and produces an action.
-        self.state_in= tf.placeholder(tf.float32, shape=[4,1])
-        hidden = slim.fully_connected(self.state_in,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
+        self.state_in= tf.placeholder(tf.int32, shape=[4])
+        state_in_OH = slim.one_hot_encoding(self.state_in,s_size)
+        hidden = slim.fully_connected(state_in_OH,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
         self.output = slim.fully_connected(hidden,a_size,activation_fn=tf.nn.softmax,biases_initializer=None)
         self.chosen_action = tf.argmax(self.output,0)
 
         #The next six lines establish the training proceedure. We feed the reward and chosen action into the network
         #to compute the loss, and use it to update the network.
         self.reward_holder = tf.placeholder(shape=[],dtype=tf.float32)
-        self.action_holder = tf.placeholder(shape=[],dtype=tf.int32) #1d array with length 16
+        self.action_holder = tf.placeholder(shape=[16],dtype=tf.int32) #1d array with length 16
 
         self.indexes = tf.range(0, tf.shape(self.output)[0]) * tf.shape(self.output)[1] + self.action_holder
         self.responsible_outputs = tf.gather(tf.reshape(self.output, [-1]), self.indexes)
@@ -48,7 +49,7 @@ class QWOPai:
         self.updateFreq=5 #how long to remember
         self.qio=QWOPInputOutput()
         self.gamma = 0.99
-        self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
+        self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=4)
     def calcReward(self):
         self.qio.curScore / (self.qio.tickCount + 1) 
     def discount_rewards(self, rewards):
@@ -59,6 +60,12 @@ class QWOPai:
             running_add = running_add * self.gamma + rewards[t]
             discounted_r[t] = running_add
         return discounted_r
+    def buttonsToInts(self):
+        qInt=1 if self.qio.QPressed else 0
+        wInt=1 if self.qio.WPressed else 0
+        oInt=1 if self.qio.OPressed else 0
+        pInt=1 if self.qio.PPressed else 0
+        return [qInt,wInt,oInt,pInt]
 
     def runAI(self):
         print("Running AI")
@@ -80,12 +87,12 @@ class QWOPai:
             while i < self.episodeTotal:
                 print(i)
                 #THIS needs to be updated to reset QWOP
-                s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
+                s = self.buttonsToInts()
                 running_reward = 0
                 ep_history = []
 
-    #            while self.qio.died==True:#game hasn't started restarted
-    #                a=3; #basically stuck in this loop til died changes
+                while self.qio.died==True:#game hasn't started restarted
+                   a=3; #basically stuck in this loop til died changes
                     
                 while self.qio.died==False:
                     #Will Need to change these eventually
@@ -95,14 +102,14 @@ class QWOPai:
                     # a = np.argmax(a_dist == a)
                     # self.qio.actionChooser(a)
                     nonRandActionProbability=min(.98,.2+i/self.episodeTotal);
-                    s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
+                    s = self.buttonsToInts()
                     if np.random.rand(1)<nonRandActionProbability: #choose random action
                         a=np.random.randint(16,size=1)[0]
                     else:
                         aDist=sess.run(self.agent.output,feed_dict={self.agent.state_in:s}) #use our net to rank actions
                         a=np.argmax(aDist) #choose best action
                     self.qio.actionChooser(a)
-                    s1 = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
+                    s1 = self.buttonsToInts()
                     # running_reward += r #use fuction for reward
                     running_reward=self.calcReward();
                     #Get our reward for taking an action given a bandit.
