@@ -34,6 +34,14 @@ class Agent():
         self.update_batch = optimizer.apply_gradients(zip(self.gradient_holders,tvars))
 
 class QWOPai:
+    episodeTotal = 5000
+    gamma = 0.99
+    episodeTotal=5000
+    numEpsInBatch=100
+    updateFreq=5
+    qio = QWOPInputOutput()
+    agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
+
     def __init__(self):
         self.episodeTotal=5000 #number of episodes that will run
         self.numEpsInBatch=100 #how long to remember
@@ -75,8 +83,9 @@ class QWOPai:
                 s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
                 running_reward = 0
                 ep_history = []
-                while self.qio.died==True:#game hasn't started restarted
-                    a=3; #basically stuck in this loop til died changes
+
+    #            while self.qio.died==True:#game hasn't started restarted
+    #                a=3; #basically stuck in this loop til died changes
                     
                 while self.qio.died==False:
                     #Will Need to change these eventually
@@ -100,9 +109,9 @@ class QWOPai:
                     ep_history.append([s,a,running_reward,s1]) #s=prevState, action, reward nextState
                     #Update the network.
                 ep_history = np.array(ep_history)
-                ep_history[:,2] = self.discount_rewards(ep_history[:,2])
-                feed_dict={self.agent.reward_holder:ep_history[:,2],
-                           self.agent.action_holder:ep_history[:,1],self.agent.state_in:np.vstack(ep_history[:,0])}
+                ep_history[:2] = self.discount_rewards(self, ep_history[:2])
+                feed_dict={self.agent.reward_holder:ep_history[:2],
+                           self.agent.action_holder:ep_history[:1],self.agent.state_in:np.vstack(ep_history[:0])}
                 grads = sess.run(self.agent.gradients, feed_dict=feed_dict)
                 for idx,grad in enumerate(grads):
                     gradBuffer[idx] += grad
