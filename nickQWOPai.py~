@@ -7,14 +7,9 @@ from server import QWOPInputOutput
 class Agent():
     def __init__(self, lr, s_size,a_size,h_size):
         #These lines established the feed-forward part of the network. The agent takes a state and produces an action.
-<<<<<<< HEAD
-        self.state_in= tf.placeholder(shape=([None, s_size]), dtype=tf.float32)
-        hidden = slim.fully_connected(self.state_in,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
-=======
         self.state_in= tf.placeholder(tf.int32, shape=[4])
         state_in_OH = slim.one_hot_encoding(self.state_in,s_size)
         hidden = slim.fully_connected(state_in_OH,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
->>>>>>> 4a0062a34a41072b8ed496198b4c6dd3c365698a
         self.output = slim.fully_connected(hidden,a_size,activation_fn=tf.nn.softmax,biases_initializer=None)
         self.chosen_action = tf.argmax(self.output,0)
 
@@ -52,16 +47,7 @@ class QWOPai:
     agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
 
     def __init__(self):
-<<<<<<< HEAD
         self.runCount = 0
-        self.qio=QWOPInputOutput()
-        self.gamma = 0.99
-        self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
-        self.episodeTotal=5000 #number of episodes that will run
-        self.numEpsInBatch=100 #how long to remember
-        self.updateFreq=5 #how long to remember
-    def discount_rewards(rewards):
-=======
         self.episodeTotal=5000 #number of episodes that will run
         self.numEpsInBatch=100 #how long to remember
         self.updateFreq=5 #how long to remember
@@ -71,7 +57,6 @@ class QWOPai:
     def calcReward(self):
         self.qio.curScore / (self.qio.tickCount + 1) 
     def discount_rewards(self, rewards):
->>>>>>> 4a0062a34a41072b8ed496198b4c6dd3c365698a
         """ take 1D float array of rewards and compute discounted reward """
         discounted_r = np.zeros_like(rewards)
         running_add = 0
@@ -79,18 +64,17 @@ class QWOPai:
             running_add = running_add * self.gamma + rewards[t]
             discounted_r[t] = running_add
         return discounted_r
-<<<<<<< HEAD
+
     
     def addRunCount():
         runCount = runCount + 1
-=======
+
     def buttonsToInts(self):
         qInt=1 if self.qio.QPressed else 0
         wInt=1 if self.qio.WPressed else 0
         oInt=1 if self.qio.OPressed else 0
         pInt=1 if self.qio.PPressed else 0
         return [qInt,wInt,oInt,pInt]
->>>>>>> 4a0062a34a41072b8ed496198b4c6dd3c365698a
 
     def runAI(self):
         print("Running AI")
@@ -110,7 +94,8 @@ class QWOPai:
                 gradBuffer[ix] = grad * 0
 
             while self.runCount < self.episodeTotal:
-                print(self.runCount)
+      #          print(self.runCount)
+       #         print(1)
                 #THIS needs to be updated to reset QWOP
                 s = self.buttonsToInts()
                 running_reward = 0
@@ -141,8 +126,8 @@ class QWOPai:
                     ep_history.append([s,a,running_reward,s1]) #s=prevState, action, reward nextState
                     #Update the network.
                 ep_history = np.array(ep_history)
-                ep_history[:2] = self.discount_rewards(ep_history[:2])
-                
+                print(ep_history)
+                ep_history[:2] = self.discount_rewards(self, ep_history[:2])                
                 feed_dict={self.agent.reward_holder:ep_history[:2],
                            self.agent.action_holder:ep_history[:1],
                            self.agent.state_in:ep_history[:0]}

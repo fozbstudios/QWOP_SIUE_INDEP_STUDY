@@ -56,7 +56,7 @@ class QWOPai:
         self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=4)
     def calcReward(self):
         self.qio.curScore / (self.qio.tickCount + 1) 
-    def discount_rewards(rewards):
+    def discount_rewards(self, rewards):
         """ take 1D float array of rewards and compute discounted reward """
         discounted_r = np.zeros_like(rewards)
         running_add = 0
@@ -94,7 +94,8 @@ class QWOPai:
                 gradBuffer[ix] = grad * 0
 
             while self.runCount < self.episodeTotal:
-                print(self.runCount)
+      #          print(self.runCount)
+       #         print(1)
                 #THIS needs to be updated to reset QWOP
                 s = self.buttonsToInts()
                 running_reward = 0
@@ -106,7 +107,7 @@ class QWOPai:
                 while self.qio.died==False:
                     #Will Need to change these eventually
                     #Probabilistically pick an action given our network outputs.
-                    # a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
+                     # a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})
                     # a = np.random.choice(a_dist[0],p=a_dist[0])
                     # a = np.argmax(a_dist == a)
                     # self.qio.actionChooser(a)
@@ -125,8 +126,8 @@ class QWOPai:
                     ep_history.append([s,a,running_reward,s1]) #s=prevState, action, reward nextState
                     #Update the network.
                 ep_history = np.array(ep_history)
-                ep_history[:2] = self.discount_rewards(ep_history[:2])
-                
+                print(ep_history)
+                ep_history[:2] = self.discount_rewards(self, ep_history[:2])                
                 feed_dict={self.agent.reward_holder:ep_history[:2],
                            self.agent.action_holder:ep_history[:1],
                            self.agent.state_in:ep_history[:0]}

@@ -149,6 +149,7 @@ class QWOPInputOutput:
     def srf(self):
         # print('clicking\n\n\n')
         self.died=False
+        print("Not Dead")
         if self.firstRun==True:
             self.socketio.emit('aiReady')
     def con(self):
@@ -157,8 +158,10 @@ class QWOPInputOutput:
         #def hc(cs):
         #print(repr(cs) +'\n\n\n')
         self.firstRun=False
+
     def fsf(self, fs):
-        #print(repr(cs) +'\n\n\n')
+        print("Dead")
+        print(repr(cs) +'\n\n\n')
         self.finScore=fs
         self.QPressed=False
         self.WPressed=False
@@ -169,6 +172,7 @@ class QWOPInputOutput:
         self.died=True
 
     def csf(self, cs):
+        self.died = false
         self.curScore=cs
         print(cs)
         self.tickCount+=1
