@@ -864,6 +864,7 @@ var world
             //&& (this.fallenEnding.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)), this.gameOverText.set_text("" + this.score + " metres"), this.gameOverText.set_pos(new I.Vector(this.fallenEnding.get_pos().x, this.fallenEnding.get_pos().y - 10)), this.gameEnded = !0)
         },
         reset: function() {
+	    sendStart()
             world.QDown=false;
             world.WDown=false;
             world.ODown=false;
