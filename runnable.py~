@@ -37,7 +37,8 @@ def cw(sid):
     socketiorunner.emit("aiReady")
 @socketiorunner.on("current score")
 def csSend(sid,css):
-    #print(css)
+    print("current score")
+    print(css)
     #print('a')
     socketiorunner.emit("current score",data=css)
 @app.route('/<path:path>')

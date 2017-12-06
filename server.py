@@ -146,7 +146,12 @@ class QWOPInputOutput:
         self.socketio.on('current score', self.csf)
         self.socketio.on('serverReady',self.srf)
         self.socketio.on('start',self.stf)
+        self.socketio.on('life', self.ltf)
         self.socketio.emit('aiReady')
+        
+    def ltf(self):
+        self.died=False
+        print("I'm ALIVE")
     def stf(self):
         self.died=False
         print("got start!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -230,7 +235,17 @@ class QWOPInputOutput:
             def cc(sid, environ):
                 print("server recieved connection")
                 clients.append(sid)
-
+                
+            @socketiorunner.on("final score")
+            def fsSend(sid,fss):
+                print("Final Score")
+                print(fss)
+                socketiorunner.emit("final score", data=fss)
+            
+            @socketiorunner.on("start")
+            def ss(sid, st):
+                print("Started")
+    
             @socketiorunner.on("test")
             def cw(sid):
                 print("server recieved connection")

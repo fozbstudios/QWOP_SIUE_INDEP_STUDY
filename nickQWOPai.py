@@ -95,7 +95,7 @@ class QWOPai:
 
             while self.runCount < self.episodeTotal:
       #          print(self.runCount)
-       #         print(1)
+                
                 #THIS needs to be updated to reset QWOP
                 s = self.buttonsToInts()
                 running_reward = 0
@@ -105,6 +105,7 @@ class QWOPai:
                    a=3; #basically stuck in this loop til died changes
                     
                 while self.qio.died==False:
+                    print("I'm NOT DEAD")
                     #Will Need to change these eventually
                     #Probabilistically pick an action given our network outputs.
                      # a_dist = sess.run(self.agent.output,feed_dict={self.agent.state_in:[s]})

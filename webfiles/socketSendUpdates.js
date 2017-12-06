@@ -7,7 +7,11 @@ function sendFinScore(fs){
 }
 function sendStart(){
     socket.emit('start');
+    console.log("Should not be dead anymore")
 }
 function sendDeath(){
     socket.emit('death');
 }
+function sendLife(){
+    socket.emit('life')
+};

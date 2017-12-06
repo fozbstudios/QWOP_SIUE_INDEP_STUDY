@@ -25,7 +25,7 @@ def root():
     # return render_template('index.html')
     return send_file('webfiles/index.html')
 socketiorunner = SocServer.Server()
-webbrowser.get().open("localhost:5001")
+webbrowser.open("localhost:5001")
 @socketiorunner.on("connection")
 def cc(sid, environ):
     print("server recieved connection")
@@ -37,6 +37,7 @@ def cw(sid):
     socketiorunner.emit("aiReady")
 @socketiorunner.on("current score")
 def csSend(sid,css):
+    #print("current score")
     #print(css)
     #print('a')
     socketiorunner.emit("current score",data=css)

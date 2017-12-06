@@ -145,10 +145,20 @@ class QWOPInputOutput:
         self.socketio.on('final score',self.fsf)
         self.socketio.on('current score', self.csf)
         self.socketio.on('serverReady',self.srf)
+        self.socketio.on('start',self.stf)
+        self.socketio.on('life', self.ltf)
         self.socketio.emit('aiReady')
+        
+    def ltf(self):
+        self.died=False
+        print("I'm ALIVE")
+    def stf(self):
+        self.died=False
+        print("got start!!!!!!!!!!!!!!!!!!!!!!!!!")
     def srf(self):
         # print('clicking\n\n\n')
         self.died=False
+        print("Not Dead")
         if self.firstRun==True:
             self.socketio.emit('aiReady')
     def con(self):
@@ -157,7 +167,9 @@ class QWOPInputOutput:
         #def hc(cs):
         #print(repr(cs) +'\n\n\n')
         self.firstRun=False
+
     def fsf(self, fs):
+        print("Dead")
         print(repr(cs) +'\n\n\n')
         self.finScore=fs
         self.QPressed=False
