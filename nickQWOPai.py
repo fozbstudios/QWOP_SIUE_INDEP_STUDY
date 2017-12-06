@@ -7,7 +7,7 @@ from server import QWOPInputOutput
 class Agent():
     def __init__(self, lr, s_size,a_size,h_size):
         #These lines established the feed-forward part of the network. The agent takes a state and produces an action.
-        self.state_in= tf.placeholder(tf.float32, shape=[4,1])
+        self.state_in= tf.placeholder(shape=([None, s_size]), dtype=tf.float32)
         hidden = slim.fully_connected(self.state_in,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
         self.output = slim.fully_connected(hidden,a_size,activation_fn=tf.nn.softmax,biases_initializer=None)
         self.chosen_action = tf.argmax(self.output,0)
@@ -24,6 +24,8 @@ class Agent():
 
         tvars = tf.trainable_variables()
         self.gradient_holders = []
+        self.reward_holder = tf.placeholder(shape=[],dtype=tf.float32)
+        self.action_holder = tf.placeholder(shape=[],dtype=tf.int32)
         for idx,var in enumerate(tvars):
             placeholder = tf.placeholder(tf.float32,name=str(idx)+'_holder')
             self.gradient_holders.append(placeholder)
@@ -34,6 +36,7 @@ class Agent():
         self.update_batch = optimizer.apply_gradients(zip(self.gradient_holders,tvars))
 
 class QWOPai:
+    runCount = 0
     episodeTotal = 5000
     gamma = 0.99
     episodeTotal=5000
@@ -45,13 +48,14 @@ class QWOPai:
     def calcReward(self):
         self.qio.curScore / (self.qio.tickCount + 1) 
     def __init__(self):
+        self.runCount = 0
         self.qio=QWOPInputOutput()
         self.gamma = 0.99
         self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
         self.episodeTotal=5000 #number of episodes that will run
         self.numEpsInBatch=100 #how long to remember
         self.updateFreq=5 #how long to remember
-    def discount_rewards(self, rewards):
+    def discount_rewards(rewards):
         """ take 1D float array of rewards and compute discounted reward """
         discounted_r = np.zeros_like(rewards)
         running_add = 0
@@ -59,6 +63,9 @@ class QWOPai:
             running_add = running_add * self.gamma + rewards[t]
             discounted_r[t] = running_add
         return discounted_r
+    
+    def addRunCount():
+        runCount = runCount + 1
 
     def runAI(self):
         print("Running AI")
@@ -77,8 +84,8 @@ class QWOPai:
             for ix,grad in enumerate(gradBuffer):
                 gradBuffer[ix] = grad * 0
 
-            while i < self.episodeTotal:
-                print(i)
+            while self.runCount < self.episodeTotal:
+                print(self.runCount)
                 #THIS needs to be updated to reset QWOP
                 s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
                 running_reward = 0
@@ -109,10 +116,25 @@ class QWOPai:
                     ep_history.append([s,a,running_reward,s1]) #s=prevState, action, reward nextState
                     #Update the network.
                 ep_history = np.array(ep_history)
-                ep_history[:2] = self.discount_rewards(self, ep_history[:2])
+                ep_history[:2] = self.discount_rewards(ep_history[:2])
+                
                 feed_dict={self.agent.reward_holder:ep_history[:2],
-                           self.agent.action_holder:ep_history[:1],self.agent.state_in:np.vstack(ep_history[:0])}
-                grads = sess.run(self.agent.gradients, feed_dict=feed_dict)
+                           self.agent.action_holder:ep_history[:1],
+                           self.agent.state_in:ep_history[:0]}
+                
+                x = tf.placeholder(shape=[0,],dtype=tf.float32)
+                y = tf.placeholder(shape=[0,],dtype=tf.int32)
+                z = tf.placeholder(shape=[None,],dtype=tf.float32)
+                
+                #self.agent.state_in = np.vstack(ep_history[:0])
+
+                feed_dict={x:ep_history[:2], y:ep_history[:1], z:ep_history[:0]}
+                    
+                tvars = tf.trainable_variables()
+                gradientsAI = tf.gradients(self.agent.loss,tvars)
+
+                grads = sess.run(gradientsAI, feed_dict=feed_dict)
+                gradientsAI = self.agent.gradients
                 for idx,grad in enumerate(grads):
                     gradBuffer[idx] += grad
 

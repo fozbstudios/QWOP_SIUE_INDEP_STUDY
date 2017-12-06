@@ -440,7 +440,7 @@ var world
             var t = window.document.getElementById("gameContent"),
                 e = window.document.getElementById("window1");
 	    //NOTE FOR RENDERRATE. THIS IS WHERE YOU CHANGE THE SPEED THAT THE GAME IS PLAYED.
-            t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .0003333333333333333, //.03333333333333333 
+            t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .00003333333333333333, //.03333333333333333 
 	    m.core.update_rate = 0, m.core.render_rate = -1, this.QDown = this.WDown = this.ODown = this.PDown = !1, this.QID = this.WID = this.OID = this.PID = 0, this.mouseClicked = "", this.accelerometer = new I.Vector(0, 0, 0), this.initialAcceleration = new I.Vector(0, 0, 0);
             var i = new o.Parcel({
                 bytes: [{
@@ -860,7 +860,7 @@ var world
 
         },
         endGame: function() {
-            null != this.rightHip && (this.rightHip.setMotorSpeed(0), this.rightHip.enableMotor(!1), this.leftHip.setMotorSpeed(0), this.leftHip.enableMotor(!1), this.rightKnee.enableLimit(!1), this.rightKnee.enableMotor(!1), this.leftKnee.enableLimit(!1), this.leftKnee.enableMotor(!1), this.rightShoulder.enableLimit(!1), this.rightShoulder.enableMotor(!1), this.leftShoulder.enableLimit(!1), this.leftShoulder.enableMotor(!1)), 0 == this.gameEnded && 1 == this.jumpLanded ? (this.jumpEnding.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)), this.gameOverText.set_text("" + this.score + " metres in " + Math.round(this.scoreTime) / 10 + " seconds"), this.gameOverText.set_pos(new I.Vector(this.jumpEnding.get_pos().x, this.jumpEnding.get_pos().y + 22)), this.gameEnded = !0) : 0 == this.gameEnded && 0 == this.jumpLanded, this.gameEnded = !0, this.reset()
+		null != this.rightHip && (this.rightHip.setMotorSpeed(0), this.rightHip.enableMotor(!1), this.leftHip.setMotorSpeed(0), this.leftHip.enableMotor(!1), this.rightKnee.enableLimit(!1), this.rightKnee.enableMotor(!1), this.leftKnee.enableLimit(!1), this.leftKnee.enableMotor(!1), this.rightShoulder.enableLimit(!1), this.rightShoulder.enableMotor(!1), this.leftShoulder.enableLimit(!1), this.leftShoulder.enableMotor(!1)), 0 == this.gameEnded && 1 == this.jumpLanded ? (this.jumpEnding.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)), this.gameOverText.set_text("" + this.score + " metres in " + Math.round(this.scoreTime) / 10 + " seconds"), this.gameOverText.set_pos(new I.Vector(this.jumpEnding.get_pos().x, this.jumpEnding.get_pos().y + 22)), this.gameEnded = !0) : 0 == this.gameEnded && 0 == this.jumpLanded, this.gameEnded = !0, this.reset(), sendDeath()
             //&& (this.fallenEnding.set_pos(new I.Vector(this.world_camera.get_pos().x + .5 * l.screenWidth, this.world_camera.get_pos().y + .5 * l.screenHeight)), this.gameOverText.set_text("" + this.score + " metres"), this.gameOverText.set_pos(new I.Vector(this.fallenEnding.get_pos().x, this.fallenEnding.get_pos().y - 10)), this.gameEnded = !0)
         },
         reset: function() {
