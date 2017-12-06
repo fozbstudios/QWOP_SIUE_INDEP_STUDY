@@ -34,15 +34,15 @@ class Agent():
         self.update_batch = optimizer.apply_gradients(zip(self.gradient_holders,tvars))
 
 class QWOPai:
-    def calcReward(self):
-        self.qio.curScore / (self.qio.tickCount + 1) 
     def __init__(self):
-        self.qio=QWOPInputOutput()
-        self.gamma = 0.99
-        self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
         self.episodeTotal=5000 #number of episodes that will run
         self.numEpsInBatch=100 #how long to remember
         self.updateFreq=5 #how long to remember
+        self.qio=QWOPInputOutput()
+        self.gamma = 0.99
+        self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
+    def calcReward(self):
+        self.qio.curScore / (self.qio.tickCount + 1) 
     def discount_rewards(self, rewards):
         """ take 1D float array of rewards and compute discounted reward """
         discounted_r = np.zeros_like(rewards)
