@@ -1058,7 +1058,7 @@ var world
             0 == h && 0 == n.match(window.location.host)
 	    }*/
         create_player: function() {
-		//       this.create_hurdle();
+		/*      this.create_hurdle();*/
             var t = o.importers.texturepacker.TexturePackerJSON.parse(this.player_atlas_json),
                 e = t.frames[0];
             this.torso = new o.Sprite({
