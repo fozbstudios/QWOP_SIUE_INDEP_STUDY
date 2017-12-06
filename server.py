@@ -145,7 +145,11 @@ class QWOPInputOutput:
         self.socketio.on('final score',self.fsf)
         self.socketio.on('current score', self.csf)
         self.socketio.on('serverReady',self.srf)
+        self.socketio.on('start',self.stf)
         self.socketio.emit('aiReady')
+    def stf(self):
+        self.died=False
+        print("got start!!!!!!!!!!!!!!!!!!!!!!!!!")
     def srf(self):
         # print('clicking\n\n\n')
         self.died=False

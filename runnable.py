@@ -25,7 +25,7 @@ def root():
     # return render_template('index.html')
     return send_file('webfiles/index.html')
 socketiorunner = SocServer.Server()
-webbrowser.open("localhost:5001")
+webbrowser.get().open("localhost:5001")
 @socketiorunner.on("connection")
 def cc(sid, environ):
     print("server recieved connection")
