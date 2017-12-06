@@ -15,7 +15,7 @@ from nickQWOPai import QWOPai as q
 def spawnThread():
     ai=q()
     #t=threading.Thread(target=q.runAI)
-    q.runAI(q)
+    q.runAI()
 app = Flask(__name__,static_folder='webfiles')
 # Routes
 @app.route('/')
