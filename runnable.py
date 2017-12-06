@@ -21,7 +21,7 @@ def root():
     # return app.send_static_file('index.html')
     # return render_template('index.html')
     return send_file('webfiles/index.html')
-socketiorunner = SocServer.Server(app, debug=True,async_mode='eventlet')
+socketiorunner = SocServer.Server()
 @socketiorunner.on("connection")
 def cc(sid, environ):
     print("server recieved connection")
