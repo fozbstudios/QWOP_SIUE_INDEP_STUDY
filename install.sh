@@ -12,7 +12,9 @@ if  $cond1 || $cond2; then
     #activate vintualenv
     source ./QWOPaiVirtualEnv/bin/activate
     pip3 install --no-cache-dir flask
-    pip3 install --no-cache-dir flask-socketio
+    # pip3 install --no-cache-dir flask-socketio
+    pip3 install --no-cache-dir python-socketio
+    pip3 install --no-cache-dir eventlet
     pip3 install socketIO-client-2
     pip3 install --no-cache-dir tensorflow
     source "" &> /dev/null #clear source
