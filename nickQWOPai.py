@@ -7,15 +7,15 @@ from server import QWOPInputOutput
 class Agent():
     def __init__(self, lr, s_size,a_size,h_size):
         #These lines established the feed-forward part of the network. The agent takes a state and produces an action.
-        self.state_in= tf.placeholder(shape=[4],dtype=tf.bool)
+        self.state_in= tf.placeholder(tf.float32, shape=[4,1])
         hidden = slim.fully_connected(self.state_in,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
         self.output = slim.fully_connected(hidden,a_size,activation_fn=tf.nn.softmax,biases_initializer=None)
         self.chosen_action = tf.argmax(self.output,0)
 
         #The next six lines establish the training proceedure. We feed the reward and chosen action into the network
         #to compute the loss, and use it to update the network.
-        self.reward_holder = tf.placeholder(shape=[],dtype=tf.float64)
-        self.action_holder = tf.placeholder(shape=[],dtype=tf.int64) #1d array with length 16
+        self.reward_holder = tf.placeholder(shape=[],dtype=tf.float32)
+        self.action_holder = tf.placeholder(shape=[],dtype=tf.int32) #1d array with length 16
 
         self.indexes = tf.range(0, tf.shape(self.output)[0]) * tf.shape(self.output)[1] + self.action_holder
         self.responsible_outputs = tf.gather(tf.reshape(self.output, [-1]), self.indexes)

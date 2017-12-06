@@ -28,12 +28,16 @@ class QWOPInputOutput:
     def controlManage(self, eventStr):
         if eventStr=="pQ":
             self.QPressed=True;self.socketio.emit('pressQ')
+            print("Pressed Q")
         elif eventStr=="pW":
             self.WPressed=True;self.socketio.emit('pressW')
+            print("Pressed W")
         elif eventStr=="pO":
             self.OPressed=True;self.socketio.emit('pressO')
+            print("Pressed O")
         elif eventStr=="pP":
             self.PPressed=True;self.socketio.emit('pressP')
+            print("Pressed P")
         elif eventStr=="rQ":
             self.QPressed=False;self.socketio.emit('releaseQ')
         elif eventStr=="rW":

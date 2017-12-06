@@ -440,7 +440,7 @@ var world
             var t = window.document.getElementById("gameContent"),
                 e = window.document.getElementById("window1");
 	    //NOTE FOR RENDERRATE. THIS IS WHERE YOU CHANGE THE SPEED THAT THE GAME IS PLAYED.
-            t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .003333333333333333, //.03333333333333333 
+            t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .00003333333333333333, //.03333333333333333 
 	    m.core.update_rate = 0, m.core.render_rate = -1, this.QDown = this.WDown = this.ODown = this.PDown = !1, this.QID = this.WID = this.OID = this.PID = 0, this.mouseClicked = "", this.accelerometer = new I.Vector(0, 0, 0), this.initialAcceleration = new I.Vector(0, 0, 0);
             var i = new o.Parcel({
                 bytes: [{
