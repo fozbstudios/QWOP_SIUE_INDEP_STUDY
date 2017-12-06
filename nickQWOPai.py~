@@ -69,7 +69,6 @@ class QWOPai:
                 gradBuffer[ix] = grad * 0
 
             while i < self.episodeTotal:
-                print(i)
                 #THIS needs to be updated to reset QWOP
                 s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
                 running_reward = 0

@@ -439,7 +439,7 @@ var world
         ready: function() {
             var t = window.document.getElementById("gameContent"),
                 e = window.document.getElementById("window1");
-	    //NOTE FOR RENDERRATE
+	    //NOTE FOR RENDERRATE. THIS IS WHERE YOU CHANGE THE SPEED THAT THE GAME IS PLAYED.
             t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .003333333333333333, //.03333333333333333 
 	    m.core.update_rate = 0, m.core.render_rate = -1, this.QDown = this.WDown = this.ODown = this.PDown = !1, this.QID = this.WID = this.OID = this.PID = 0, this.mouseClicked = "", this.accelerometer = new I.Vector(0, 0, 0), this.initialAcceleration = new I.Vector(0, 0, 0);
             var i = new o.Parcel({
@@ -5957,8 +5957,6 @@ A.Boot = function() {}, i["js.Boot"] = A.Boot, A.Boot.__name__ = !0, A.Boot.__un
 });
 
 
-//NOTE: This is where I believe that the game is controlling how fast the game updates.
-
 var C = {};
 C.App = function() {
     this.next_render = 0, 
@@ -5998,7 +5996,7 @@ C.App = function() {
     ongamepaddevice: function() {},
     on_internal_init: function() {
 	//NOTE
-	this.cur_frame_start = C.Snow.core.timestamp(), this.last_frame_start = this.cur_frame_start, this.current_time = 0, this.delta_time = .00016 //Originally .016
+	this.cur_frame_start = C.Snow.core.timestamp(), this.last_frame_start = this.cur_frame_start, this.current_time = 0, this.delta_time = .016 //Originally .016
     },
     on_internal_update: function() {
         if (0 != this.update_rate) {
