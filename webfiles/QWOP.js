@@ -439,7 +439,9 @@ var world
         ready: function() {
             var t = window.document.getElementById("gameContent"),
                 e = window.document.getElementById("window1");
-            t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .03333333333333333, m.core.update_rate = 0, m.core.render_rate = -1, this.QDown = this.WDown = this.ODown = this.PDown = !1, this.QID = this.WID = this.OID = this.PID = 0, this.mouseClicked = "", this.accelerometer = new I.Vector(0, 0, 0), this.initialAcceleration = new I.Vector(0, 0, 0);
+	    //NOTE FOR RENDERRATE. THIS IS WHERE YOU CHANGE THE SPEED THAT THE GAME IS PLAYED.
+            t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .003333333333333333, //.03333333333333333 
+	    m.core.update_rate = 0, m.core.render_rate = -1, this.QDown = this.WDown = this.ODown = this.PDown = !1, this.QID = this.WID = this.OID = this.PID = 0, this.mouseClicked = "", this.accelerometer = new I.Vector(0, 0, 0), this.initialAcceleration = new I.Vector(0, 0, 0);
             var i = new o.Parcel({
                 bytes: [{
                     id: "assets/assetbundle.parcel"
@@ -5955,8 +5957,6 @@ A.Boot = function() {}, i["js.Boot"] = A.Boot, A.Boot.__name__ = !0, A.Boot.__un
 });
 
 
-//NOTE: This is where I believe that the game is controlling how fast the game updates.
-
 var C = {};
 C.App = function() {
     this.next_render = 0, 
@@ -5966,8 +5966,8 @@ C.App = function() {
     this.current_time = 0, 
     this.last_frame_start = 0, 
     this.delta_sim = .016666666666666666, 
-    this.delta_time = .016666666666666666, 
-    this.max_frame_time = .25, 
+    this.delta_time = .016666666666666666,  //.016666666666666666 
+    this.max_frame_time = .25, //.25 original value
     this.update_rate = 0, 
     this.render_rate = -1, 
     this.fixed_delta = 0, 
@@ -5995,7 +5995,8 @@ C.App = function() {
     ongamepadup: function() {},
     ongamepaddevice: function() {},
     on_internal_init: function() {
-        this.cur_frame_start = C.Snow.core.timestamp(), this.last_frame_start = this.cur_frame_start, this.current_time = 0, this.delta_time = .016
+	//NOTE
+	this.cur_frame_start = C.Snow.core.timestamp(), this.last_frame_start = this.cur_frame_start, this.current_time = 0, this.delta_time = .016 //Originally .016
     },
     on_internal_update: function() {
         if (0 != this.update_rate) {
@@ -6011,7 +6012,9 @@ C.App = function() {
     },
     __class__: C.App
 }, C.AppFixedTimestep = function() {
-    this.overflow = 0, this.frame_time = .0167, C.App.call(this)
+    //NOTE
+    this.overflow = 0, this.frame_time = .00167, //.0167
+    C.App.call(this)
 }, i["snow.AppFixedTimestep"] = C.AppFixedTimestep, C.AppFixedTimestep.__name__ = !0, C.AppFixedTimestep.__super__ = C.App, C.AppFixedTimestep.prototype = t(C.App.prototype, {
     on_internal_init: function() {
         C.App.prototype.on_internal_init.call(this), this.frame_time = .016666666666666666, this.last_frame_start = C.Snow.core.timestamp()
