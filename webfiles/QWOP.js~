@@ -5971,7 +5971,7 @@ C.App = function() {
     this.update_rate = 0, 
     this.render_rate = -1, 
     this.fixed_delta = 0, 
-    this.timescale = 10
+    this.timescale = 1
 }, i["snow.App"] = C.App, C.App.__name__ = !0, C.App.prototype = {
     config: function(t) {
         return t

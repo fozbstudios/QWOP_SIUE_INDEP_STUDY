@@ -1057,7 +1057,6 @@ var world
                 h = !1;
             0 == h && 0 == n.match(window.location.host)
 	    }*/
-	,
         create_player: function() {
             this.create_hurdle();
             var t = o.importers.texturepacker.TexturePackerJSON.parse(this.player_atlas_json),
