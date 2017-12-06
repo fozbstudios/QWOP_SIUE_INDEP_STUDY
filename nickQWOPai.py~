@@ -7,15 +7,21 @@ from server import QWOPInputOutput
 class Agent():
     def __init__(self, lr, s_size,a_size,h_size):
         #These lines established the feed-forward part of the network. The agent takes a state and produces an action.
-        self.state_in= tf.placeholder(tf.float32, shape=[4,1])
+<<<<<<< HEAD
+        self.state_in= tf.placeholder(shape=([None, s_size]), dtype=tf.float32)
         hidden = slim.fully_connected(self.state_in,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
+=======
+        self.state_in= tf.placeholder(tf.int32, shape=[4])
+        state_in_OH = slim.one_hot_encoding(self.state_in,s_size)
+        hidden = slim.fully_connected(state_in_OH,h_size,biases_initializer=None,activation_fn=tf.nn.relu)
+>>>>>>> 4a0062a34a41072b8ed496198b4c6dd3c365698a
         self.output = slim.fully_connected(hidden,a_size,activation_fn=tf.nn.softmax,biases_initializer=None)
         self.chosen_action = tf.argmax(self.output,0)
 
         #The next six lines establish the training proceedure. We feed the reward and chosen action into the network
         #to compute the loss, and use it to update the network.
         self.reward_holder = tf.placeholder(shape=[],dtype=tf.float32)
-        self.action_holder = tf.placeholder(shape=[],dtype=tf.int32) #1d array with length 16
+        self.action_holder = tf.placeholder(shape=[16],dtype=tf.int32) #1d array with length 16
 
         self.indexes = tf.range(0, tf.shape(self.output)[0]) * tf.shape(self.output)[1] + self.action_holder
         self.responsible_outputs = tf.gather(tf.reshape(self.output, [-1]), self.indexes)
@@ -24,6 +30,8 @@ class Agent():
 
         tvars = tf.trainable_variables()
         self.gradient_holders = []
+        self.reward_holder = tf.placeholder(shape=[],dtype=tf.float32)
+        self.action_holder = tf.placeholder(shape=[],dtype=tf.int32)
         for idx,var in enumerate(tvars):
             placeholder = tf.placeholder(tf.float32,name=str(idx)+'_holder')
             self.gradient_holders.append(placeholder)
@@ -34,16 +42,36 @@ class Agent():
         self.update_batch = optimizer.apply_gradients(zip(self.gradient_holders,tvars))
 
 class QWOPai:
-    def calcReward(self):
-        self.qio.curScore / (self.qio.tickCount + 1) 
+    runCount = 0
+    episodeTotal = 5000
+    gamma = 0.99
+    episodeTotal=5000
+    numEpsInBatch=100
+    updateFreq=5
+    qio = QWOPInputOutput()
+    agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
+
     def __init__(self):
+<<<<<<< HEAD
+        self.runCount = 0
         self.qio=QWOPInputOutput()
         self.gamma = 0.99
         self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
         self.episodeTotal=5000 #number of episodes that will run
         self.numEpsInBatch=100 #how long to remember
         self.updateFreq=5 #how long to remember
+    def discount_rewards(rewards):
+=======
+        self.episodeTotal=5000 #number of episodes that will run
+        self.numEpsInBatch=100 #how long to remember
+        self.updateFreq=5 #how long to remember
+        self.qio=QWOPInputOutput()
+        self.gamma = 0.99
+        self.agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=4)
+    def calcReward(self):
+        self.qio.curScore / (self.qio.tickCount + 1) 
     def discount_rewards(self, rewards):
+>>>>>>> 4a0062a34a41072b8ed496198b4c6dd3c365698a
         """ take 1D float array of rewards and compute discounted reward """
         discounted_r = np.zeros_like(rewards)
         running_add = 0
@@ -51,6 +79,18 @@ class QWOPai:
             running_add = running_add * self.gamma + rewards[t]
             discounted_r[t] = running_add
         return discounted_r
+<<<<<<< HEAD
+    
+    def addRunCount():
+        runCount = runCount + 1
+=======
+    def buttonsToInts(self):
+        qInt=1 if self.qio.QPressed else 0
+        wInt=1 if self.qio.WPressed else 0
+        oInt=1 if self.qio.OPressed else 0
+        pInt=1 if self.qio.PPressed else 0
+        return [qInt,wInt,oInt,pInt]
+>>>>>>> 4a0062a34a41072b8ed496198b4c6dd3c365698a
 
     def runAI(self):
         print("Running AI")
@@ -59,6 +99,7 @@ class QWOPai:
 
         # Launch the tensorflow graph
         with tf.Session() as sess:
+            writer = tf.summary.FileWriter("output", sess.graph)
             sess.run(init)
             i = 0
             total_reward = []
@@ -68,14 +109,15 @@ class QWOPai:
             for ix,grad in enumerate(gradBuffer):
                 gradBuffer[ix] = grad * 0
 
-            while i < self.episodeTotal:
-                print(i)
+            while self.runCount < self.episodeTotal:
+                print(self.runCount)
                 #THIS needs to be updated to reset QWOP
-                s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
+                s = self.buttonsToInts()
                 running_reward = 0
                 ep_history = []
+
                 while self.qio.died==True:#game hasn't started restarted
-                    a=3; #basically stuck in this loop til died changes
+                   a=3; #basically stuck in this loop til died changes
                     
                 while self.qio.died==False:
                     #Will Need to change these eventually
@@ -85,24 +127,39 @@ class QWOPai:
                     # a = np.argmax(a_dist == a)
                     # self.qio.actionChooser(a)
                     nonRandActionProbability=min(.98,.2+i/self.episodeTotal);
-                    s = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
+                    s = self.buttonsToInts()
                     if np.random.rand(1)<nonRandActionProbability: #choose random action
                         a=np.random.randint(16,size=1)[0]
                     else:
                         aDist=sess.run(self.agent.output,feed_dict={self.agent.state_in:s}) #use our net to rank actions
                         a=np.argmax(aDist) #choose best action
                     self.qio.actionChooser(a)
-                    s1 = [self.qio.QPressed,self.qio.WPressed,self.qio.OPressed,self.qio.PPressed]
+                    s1 = self.buttonsToInts()
                     # running_reward += r #use fuction for reward
                     running_reward=self.calcReward();
                     #Get our reward for taking an action given a bandit.
                     ep_history.append([s,a,running_reward,s1]) #s=prevState, action, reward nextState
                     #Update the network.
                 ep_history = np.array(ep_history)
-                ep_history[:,2] = self.discount_rewards(ep_history[:,2])
-                feed_dict={self.agent.reward_holder:ep_history[:,2],
-                           self.agent.action_holder:ep_history[:,1],self.agent.state_in:np.vstack(ep_history[:,0])}
-                grads = sess.run(self.agent.gradients, feed_dict=feed_dict)
+                ep_history[:2] = self.discount_rewards(ep_history[:2])
+                
+                feed_dict={self.agent.reward_holder:ep_history[:2],
+                           self.agent.action_holder:ep_history[:1],
+                           self.agent.state_in:ep_history[:0]}
+                
+                x = tf.placeholder(shape=[0,],dtype=tf.float32)
+                y = tf.placeholder(shape=[0,],dtype=tf.int32)
+                z = tf.placeholder(shape=[None,],dtype=tf.float32)
+                
+                #self.agent.state_in = np.vstack(ep_history[:0])
+
+                feed_dict={x:ep_history[:2], y:ep_history[:1], z:ep_history[:0]}
+                    
+                tvars = tf.trainable_variables()
+                gradientsAI = tf.gradients(self.agent.loss,tvars)
+
+                grads = sess.run(gradientsAI, feed_dict=feed_dict)
+                gradientsAI = self.agent.gradients
                 for idx,grad in enumerate(grads):
                     gradBuffer[idx] += grad
 
@@ -120,3 +177,4 @@ class QWOPai:
                     print(np.mean(total_reward[-100:]))
                     i += 1
 
+        writer.close()
