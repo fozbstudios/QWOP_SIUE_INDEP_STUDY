@@ -5953,25 +5953,9 @@ A.Boot = function() {}, i["js.Boot"] = A.Boot, A.Boot.__name__ = !0, A.Boot.__un
         get_size: "get_size"
     })
 });
-
-
-//NOTE: This is where I believe that the game is controlling how fast the game updates.
-
 var C = {};
 C.App = function() {
-    this.next_render = 0, 
-    this.next_tick = 0, 
-    this.alpha = 1, 
-    this.cur_frame_start = 0, 
-    this.current_time = 0, 
-    this.last_frame_start = 0, 
-    this.delta_sim = .016666666666666666, 
-    this.delta_time = .016666666666666666, 
-    this.max_frame_time = .25, 
-    this.update_rate = 0, 
-    this.render_rate = -1, 
-    this.fixed_delta = 0, 
-    this.timescale = 10
+    this.next_render = 0, this.next_tick = 0, this.alpha = 1, this.cur_frame_start = 0, this.current_time = 0, this.last_frame_start = 0, this.delta_sim = .016666666666666666, this.delta_time = .016666666666666666, this.max_frame_time = .25, this.update_rate = 0, this.render_rate = -1, this.fixed_delta = 0, this.timescale = 1
 }, i["snow.App"] = C.App, C.App.__name__ = !0, C.App.prototype = {
     config: function(t) {
         return t
