@@ -439,8 +439,8 @@ var world
         ready: function() {
             var t = window.document.getElementById("gameContent"),
                 e = window.document.getElementById("window1");
-	    //NOTE FOR RENDERRATE. THIS IS WHERE YOU CHANGE THE SPEED THAT THE GAME IS PLAYED.
-            t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .0003333333333333333, //.03333333333333333 
+	    //NOTE FOR RENDERRATE. THIS IS WHERE YOU CHANGE THE SPEED THAT THE GAME IS PLAYED. nick know this is where it actually is
+            t.appendChild(e), this.gameOver = !1, this.gameEnded = !1, this.jumped = !1, this.jumpLanded = !1, this.fallen = !1, this.pause = !1, this.helpUp = !1, this.mute = !1, m.core.frame_time = .03333333333333333, //.03333333333333333 
 	    m.core.update_rate = 0, m.core.render_rate = -1, this.QDown = this.WDown = this.ODown = this.PDown = !1, this.QID = this.WID = this.OID = this.PID = 0, this.mouseClicked = "", this.accelerometer = new I.Vector(0, 0, 0), this.initialAcceleration = new I.Vector(0, 0, 0);
             var i = new o.Parcel({
                 bytes: [{
@@ -5966,8 +5966,8 @@ C.App = function() {
     this.cur_frame_start = 0, 
     this.current_time = 0, 
     this.last_frame_start = 0, 
-    this.delta_sim = .016666666666666666, 
-    this.delta_time = .016666666666666666,  //.016666666666666666 
+    this.delta_sim = .916666666666666666, 
+    this.delta_time = .916666666666666666,  //.016666666666666666 
     this.max_frame_time = .25, //.25 original value
     this.update_rate = 0, 
     this.render_rate = -1, 
@@ -5996,7 +5996,6 @@ C.App = function() {
     ongamepadup: function() {},
     ongamepaddevice: function() {},
     on_internal_init: function() {
-	//NOTE
 	this.cur_frame_start = C.Snow.core.timestamp(), this.last_frame_start = this.cur_frame_start, this.current_time = 0, this.delta_time = .016 //Originally .016
     },
     on_internal_update: function() {

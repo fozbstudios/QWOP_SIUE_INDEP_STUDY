@@ -208,7 +208,7 @@ if __name__ == '__main__':
     # socketiorunner = SocServer.Server(app, debug=True,async_mode='eventlet')
     # app.wsgi_app=SocServer.Middleware(socketiorunner,app)
     # eventlet.wsgi.server(eventlet.listen(('', 5001)), app);
-    # thr= threading.Thread(target=threadWork)
+     
     @app.route('/')
     def root():
         # return app.send_static_file('index.html')
@@ -221,10 +221,9 @@ if __name__ == '__main__':
     @socketiorunner.on("connection")
     def cc(sid, environ):
         print("server recieved connection")
-        clients.append(sid)
 
     @socketiorunner.on("final score")
-    def fsSend(sid,fjss):
+    def fsSend(sid,fss):
         print("Final Score")
         print(fss)
         socketiorunner.emit("final score", data=fss)

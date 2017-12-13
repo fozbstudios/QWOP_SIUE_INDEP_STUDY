@@ -43,7 +43,7 @@ class QWOPai:
     episodeTotal=5000
     numEpsInBatch=100
     updateFreq=5
-    qio = QWOPInputOutput()
+    # qio = QWOPInputOutput()
     agent = Agent(lr=1e-2,s_size=4,a_size=2,h_size=8)
 
     def __init__(self):
@@ -66,8 +66,6 @@ class QWOPai:
         return discounted_r
 
     
-    def addRunCount():
-        runCount = runCount + 1
 
     def buttonsToInts(self):
         qInt=1 if self.qio.QPressed else 0
